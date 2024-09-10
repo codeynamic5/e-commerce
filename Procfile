@@ -1,2 +1,2 @@
 release: python3 manage.py migrate --noinput
-web: gunicorn biyung.wsgi
+web: gunicorn e_commerce.wsgi
