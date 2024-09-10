@@ -1,8 +1,15 @@
 <h1>Biyung Cafe</h1>
 
-<h5>Name: </h5>
-<p>{{ name }}</p> 
-<h5>Price: </h5>
-<p>{{ price }}</p> 
-<h5>Description: </h5>
-<p>{{ description }}</p> 
+<div class="row">
+  {% for context in context %}
+    <div class="col">
+    <div class="card" style="width: 18rem;">
+        <img src="{{ context.image }}" class="card-image" alt="">
+        <div class="card-body">
+          <p class="card-text">Rp{{ context.price }}</p>
+          <h5 class="card-title">{{ context.name }}</h5>
+          <h6 class="card-description">{{ context.description }}</h6>
+        </div>
+      </div> 
+    </div>
+  {% endfor %}
