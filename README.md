@@ -117,21 +117,21 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 
    ```mermaid 
    gitGraph
-        commit id: "Client"
         branch user
         checkout user
-        commit id: "Browser: HTTP"
+        commit id: "Client"
         branch url
         checkout url
-        commit id: "Akses view"
+        commit id: "Browser: HTTP"
         branch views
         checkout views
-        commit id: "Database"
+        commit id: "Akses view"
         branch models
         checkout models
-        commit id: "Template"
+        commit id: "Database"
         branch html
         checkout html
+        commit id: "Template"
    ```
 
 ## Fungsi git dalam Pengembangan Perangkat Lunak
