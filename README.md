@@ -121,12 +121,6 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
            checkout user
            commit id: "urls.py"
            checkout http
-           commit id: "views.py"
-           checkout request
-           commit id: "models.py"
-           checkout database
-           commit id: "HTML"
-           checkout template
    ~~~
 
 ## Fungsi git dalam Pengembangan Perangkat Lunak
