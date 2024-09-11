@@ -119,7 +119,7 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
       gitGraph
            commit id: "Client"
            checkout user
-           commit id: "urls.py"
+           commit id: "urls"
            checkout http
    ~~~
 
