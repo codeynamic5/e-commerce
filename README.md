@@ -117,8 +117,9 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 
 ~~~mermaid
 Pola Django;
-   User/Client --> urls.py;
-   urls.py --> views.py;
+   commit id: "User/Client"
+   commit id: "Browser --> HTTP"
+   checkout main
 ~~~
 
 
