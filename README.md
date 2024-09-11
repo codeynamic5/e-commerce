@@ -119,9 +119,11 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 Pola Django;
    User/Client -->|Request dalam bentuk HTTP| urls.py;
    urls.py -->|Memilih view| views.py;
+~~~
 
-
-
+~~~mermaid
+   info
+~~~
 
 
 
