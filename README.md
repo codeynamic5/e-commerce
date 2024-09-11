@@ -115,7 +115,7 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 
 ## Bagan Request Client ke Web Aplikasi Django & Respon Client
 
-'''mermaid
+~~~mermaid
 Pola Django;
    User/Client -->|Request dalam bentuk HTTP| urls.py;
    urls.py -->|Memilih view| views.py;
