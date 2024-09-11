@@ -1,15 +1,7 @@
-<h1>Biyung Cafe</h1>
+{% extends 'base.html'%}
 
-<div class="row">
-  {% for context in context %}
-    <div class="col">
-    <div class="card" style="width: 18rem;">
-        <img src="{{ context.image }}" class="card-image" alt="">
-        <div class="card-body">
-          <p class="card-text">Rp{{ context.price }}</p>
-          <h5 class="card-title">{{ context.name }}</h5>
-          <h6 class="card-description">{{ context.description }}</h6>
-        </div>
-      </div> 
-    </div>
-  {% endfor %}
+{% block content %}
+<h1 class="center">Welcome to Biyung Cafe
+  <h2>Where delight meets divine</h2>
+</h1>
+{% endblock content %}
