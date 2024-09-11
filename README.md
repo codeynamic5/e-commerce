@@ -117,20 +117,13 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 
 ```mermaid 
    gitGraph
-        commit id: "1"
-        commit id: "2"
+        commit id: "User/Client"
+        commit id: "Browser/HTTP/URL"
+        commit id: "Views"
+        commit id: "Model"
         branch nice_feature
-        checkout nice_feature
-        commit id: "3"
+        commit id: "Template"
         checkout main
-        commit id: "4"
-        checkout nice_feature
-        branch very_nice_feature
-        checkout very_nice_feature
-        commit id: "5"
-        checkout main
-        commit id: "6"
-        checkout nice_feature
         commit id: "7" type: REVERSE
         checkout main
         commit id: "customID"
