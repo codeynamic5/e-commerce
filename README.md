@@ -5,7 +5,7 @@ Biyung Cafe
 ## Kelas: PBP B
 
 ## Link PWS Biyung Cafe
-http://abella-maya-biyung.pbp.cs.ui.ac.id/
+[http://abella-maya-biyung.pbp.cs.ui.ac.id/](http://abella-maya-ebiyung.pbp.cs.ui.ac.id/)
 
 ## Link Vercel Biyung Cafe
 
