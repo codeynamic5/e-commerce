@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h1>Biyung Cafe</h1>
+
+<div class="row">
+  {% for c in context %}
+    <div class="col">
+    <div class="card" style="width: 18rem;">
+        <img src="{{ c.image }}" class="card-image" alt="">
+        <div class="card-body">
+          <p class="card-text">Rp{{ c.price }}</p>
+          <h5 class="card-title">{{ c.name }}</h5>
+          <h6 class="card-description">{{ c.description }}</h6>
+        </div>
+      </div> 
+    </div>
+  {% endfor %}
+
+  {% endblock content %}
