@@ -117,13 +117,16 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 
 ```mermaid 
    gitGraph
-        commit id: "User/Client"
-        commit id: "Browser/HTTP/URL"
-        commit id: "Views"
-        commit id: "Model"
-        branch nice_feature
-        commit id: "Template"
-        checkout main
+        commit id: "Client"
+        checkout User
+        commit id: "urls.py"
+        checkout HTTP
+        commit id: "views.py"
+        checkout Request
+        commit id: "models.py"
+        checkout Database
+        commit id: "HTML, CSS, JavaScript"
+        checkout Template
 ```
 
 ## Fungsi git dalam Pengembangan Perangkat Lunak
