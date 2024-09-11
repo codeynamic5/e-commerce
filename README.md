@@ -136,6 +136,12 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
         checkout user
    ```
 
+   - user mengirimkan request yang dikirim dalam bentuk http.
+   - urls.py menerima request tersebut dan menentukan view yang akan diakses berdasarkan URL yang diterima.
+   - views.py berisi fungsi perintah sesuai dengan request dari user, request tersebut ditangani oleh views.py. Response yang diberikan akan berupa bentuk HTML.
+   - models.py mengandung program Python yang akan digunakan dan dikonek dengan tabel database.
+   - tempate berisi file-file dalam bentuk HTML, CSS, maupun JavaScript yang memberikan struktur dan layout halaman aplikasi web. Ouput dari template adalah yang dikirimkan kembali ke user sebagai tampilan web.
+
 ## Fungsi git dalam Pengembangan Perangkat Lunak
 
 Git adalah sistem version control terdistribusi yang memungkinkan pengembang melacak perubahan kode, berkolaborasi dengan tim, dan mengelola riwayat versi proyek. Git sangat penting dalam pengembangan perangkat lunak karena:
