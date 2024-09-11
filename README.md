@@ -88,9 +88,9 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 6. **Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py.**
 
    Saya memiliki tiga path url yang ditampilkan di web, yaitu Home/main, Model, dan Static. Untuk mengakses halaman main atau dalam web yang saya buat adalah biyung, maka tautan yang dapat diakses adalah:
-   Home/main: http://localhost:8000/biyung/
-   Model: http://localhost:8000/biyung/model/
-   Static: http://localhost:8000/biyung/static/
+   - Home/main: http://localhost:8000/biyung/
+   - Model: http://localhost:8000/biyung/model/
+   - Static: http://localhost:8000/biyung/static/
    ~~~
        from django.urls import path
        from main.views import show_main
