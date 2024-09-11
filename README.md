@@ -125,7 +125,7 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
         checkout Request
         commit id: "models.py"
         checkout Database
-        commit id: "HTML, CSS, JavaScript"
+        commit id: "HTML"
         checkout Template
 ```
 
