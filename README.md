@@ -131,7 +131,8 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
         commit id: "Database"
         branch html
         checkout html
-        commit id: "Template"
+        commit id: "Template" type: REVERSE
+        checkout user
    ```
 
 ## Fungsi git dalam Pengembangan Perangkat Lunak
