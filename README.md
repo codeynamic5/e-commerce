@@ -126,6 +126,29 @@ Pola Django;
 ~~~
 
 
-
+```mermaid 
+   gitGraph
+        commit id: "1"
+        commit id: "2"
+        branch nice_feature
+        checkout nice_feature
+        commit id: "3"
+        checkout main
+        commit id: "4"
+        checkout nice_feature
+        branch very_nice_feature
+        checkout very_nice_feature
+        commit id: "5"
+        checkout main
+        commit id: "6"
+        checkout nice_feature
+        commit id: "7" type: REVERSE
+        checkout main
+        commit id: "customID"
+        merge nice_feature tag: "customTag"
+        checkout very_nice_feature
+        commit id: "8"
+        checkout main
+        commit id: "9"
 
    
