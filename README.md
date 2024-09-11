@@ -124,14 +124,6 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
         branch nice_feature
         commit id: "Template"
         checkout main
-        commit id: "7" type: REVERSE
-        checkout main
-        commit id: "customID"
-        merge nice_feature tag: "customTag"
-        checkout very_nice_feature
-        commit id: "8"
-        checkout main
-        commit id: "9"
 
 
 
