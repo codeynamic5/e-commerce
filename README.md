@@ -118,11 +118,20 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
    ```mermaid 
    gitGraph
         commit id: "Client"
-        branch url
-        checkout url
-        commit id: ""
         branch user
         checkout user
+        commit id: "Browser: HTTP"
+        branch url
+        checkout url
+        commit id: "Akses view"
+        branch views
+        checkout views
+        commit id: "Database"
+        branch models
+        checkout models
+        commit id: "Template"
+        branch html
+        checkout html
    ```
 
 ## Fungsi git dalam Pengembangan Perangkat Lunak
