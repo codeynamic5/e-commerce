@@ -115,13 +115,15 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
 
 ## Bagan Request Client ke Web Aplikasi Django & Respon Client
 
-   ~~~mermaid 
-      gitGraph
-           commit id: "Client"
-           checkout user
-           commit id: "urls"
-           checkout http
-   ~~~
+   ```mermaid 
+   gitGraph
+        commit id: "Client"
+        branch url
+        checkout url
+        commit id: ""
+        branch user
+        checkout user
+   ```
 
 ## Fungsi git dalam Pengembangan Perangkat Lunak
 
