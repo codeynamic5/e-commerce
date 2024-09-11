@@ -111,3 +111,19 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
       git push pws master
    ~~~
    Sesuai dengan branch yang digunakan. 
+
+
+## Bagan Request Client ke Web Aplikasi Django & Respon Client
+
+'''mermaid
+Pola Django;
+   User/Client -->|Request dalam bentuk HTTP| urls.py;
+   urls.py -->|Memilih view| views.py;
+
+
+
+
+
+
+
+   
