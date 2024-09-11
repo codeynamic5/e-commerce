@@ -132,6 +132,7 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
         branch html
         checkout html
         commit id: "Template" type: REVERSE
+        merge user
         checkout user
    ```
 
