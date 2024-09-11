@@ -124,9 +124,24 @@ Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tuto
         branch nice_feature
         commit id: "Template"
         checkout main
+```
 
+## Fungsi git dalam Pengembangan Perangkat Lunak
 
+Git adalah sistem version control terdistribusi yang memungkinkan pengembang melacak perubahan kode, berkolaborasi dengan tim, dan mengelola riwayat versi proyek. Git sangat penting dalam pengembangan perangkat lunak karena:
+1. Version Control: Git melacak setiap perubahan yang dilakukan pada kode sumber, memungkinkan rollback ke versi sebelumnya jika ada masalah.
+2. Kolaborasi: Memungkinkan beberapa pengembang bekerja pada kode yang sama secara bersamaan, menggabungkan perubahan melalui branching dan merging.
+3. Integritas Kode: Memastikan perubahan dapat diuji dan divalidasi sebelum digabungkan ke branch utama.
 
+## Alasan Framework Django dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
 
+Django sering dijadikan framework awal untuk pembelajaran karena:
+1. Baterai Tersedia: Django hadir dengan berbagai fitur siap pakai (misalnya, otentikasi, manajemen pengguna, admin panel), sehingga memungkinkan pemula memahami konsep dasar pengembangan aplikasi web tanpa perlu membangun dari nol.
+2. Dokumentasi yang Baik: Django memiliki dokumentasi yang sangat baik dan komunitas yang besar, yang memudahkan pembelajaran dan penyelesaian masalah.
+3. Konvensi over Konfigurasi: Django menyediakan default yang masuk akal, sehingga pemula dapat fokus pada logika aplikasi tanpa terlalu banyak konfigurasi.
+
+## Alasan model pada Django disebut sebagai ORM
+
+Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena Django menggunakan teknik ORM untuk menghubungkan model Python dengan tabel database. ORM memungkinkan pengembang untuk berinteraksi dengan database menggunakan objek Python alih-alih menggunakan SQL secara langsung, sehingga mengabstraksi detail database dan membuat kode lebih mudah dibaca dan dipelihara.
 
    
