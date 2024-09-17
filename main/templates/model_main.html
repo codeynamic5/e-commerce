@@ -1,20 +1,65 @@
-{% extends 'base.html'%}
-
-{% block content %}
-<h1>Biyung Cafe</h1>
+{% extends 'base.html'%} {% block content %}
+<html lang="en">
+  <head>
+    <title>Biyung Cafe</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      body {
+        background-color: rgba(34, 11, 126, 0.876);
+      }
+      .center {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+      }
+      .p1 {
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 5px;
+      }
+      .h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 24px;
+      }
+      .h5 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+      .border {
+        border: 2px solid black; /* Visible border */
+        border-radius: 15px; /* Rounded corners */
+        padding: 20px; /* Space inside the box */
+        background-color: white; /* Background color for the box */
+        width: 300px; /* Set width of the box */
+        margin: 0 auto; /* Center the box horizontally */
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="center" style="color: aliceblue">Founder of Biyung Cafe</h1>
+    <h2 class="center" style="color: aliceblue">Abella Maya Santi</h2>
+    <h2 class="center" style="color: aliceblue">PBP B</h2>
+  </body>
+</html>
 
 <div class="row">
   {% for c in context %}
-    <div class="col">
-    <div class="card" style="width: 18rem;">
-        <img src="{{ c.image }}" class="card-image" alt="">
-        <div class="card-body">
-          <p class="card-text">Rp{{ c.price }}</p>
-          <h5 class="card-title">{{ c.name }}</h5>
-          <h6 class="card-description">{{ c.description }}</h6>
-        </div>
-      </div> 
+  <div class="col">
+    <div class="card" style="width: 18rem">
+      <img src="{{ c.image }}" class="card-image" alt="" />
+      <div class="card-body">
+        <p class="card-text">Rp{{ c.price }}</p>
+        <h5 class="card-title">{{ c.name }}</h5>
+        <h6 class="card-description">{{ c.description }}</h6>
+      </div>
     </div>
-  {% endfor %}
-
-  {% endblock content %}
+  </div>
+  {% endfor %} {% endblock content %}
+</div>

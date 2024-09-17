@@ -1,4 +1,5 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 <html lang="en">
   <head>
     <title>Biyung Cafe</title>
@@ -48,4 +49,31 @@
     <h2 class="center" style="color: aliceblue;">Where flavour meets divine</h2>
   </body>
 </html>
+{% if not mood_entries %}
+<p>Belum ada data product pada Biyung Cafe.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data product di bawah baris ini 
+  {% endcomment %} 
+  {% for product_entry in product_entries %}
+  <tr>
+    <td>{{product_entry.name}}</td>
+    <td>{{product_entry.price}}</td>
+    <td>{{product_entry.quantity}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product_entry' %}">
+  <button>Add New Product Entry</button>
+</a>
 {% endblock content %}
