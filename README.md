@@ -7,9 +7,9 @@ Biyung Cafe
 ## Link PWS Biyung Cafe
 [http://abella-maya-ebiyung.pbp.cs.ui.ac.id/](http://abella-maya-ebiyung.pbp.cs.ui.ac.id/)
 
-## Link Vercel Biyung Cafe
 
 
+# Tugas 2
 ## Implementasi Checklist Tugas Step-by-Step 
 Sebagai fondasi awal dalam mengerjakan tugas, saya mengikuti Tutorial 0 dan Tutorial 1. Namun, ada beberapa kode yang saya modifikasi berdasarkan penyesuaian terhadap web yang saya ingin kembangkan.
 1. **Membuat sebuah proyek Django baru.**
