@@ -356,5 +356,10 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
                 path('json/', show_json, name='show_json'),
                 path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
                 path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
-]
+               ]
       ###
+
+## Screenshot dari hasil akses URL pada Postman
+
+   ### show_xml
+      <img width="1800" alt="Screenshot 2024-09-18 at 03 56 33" src="https://github.com/user-attachments/assets/363025dc-34c3-4ba6-b7f5-1fcdf9422c78">
