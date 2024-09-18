@@ -236,3 +236,125 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
       - Pembuatan Permintaan Palsu Otentik
          Tanpa token CSRF, web akan dengan mudah diserang dengan pembuatan sebuah permintaan palsu yang tidak dapat diperiksa perbedaan antara yang asli dan yang palsu. Pembuatan permintaan tersebut tanpa sepengetahuan pengguna.
 ## Implementasi Checklist secara Step-by-Step
+   Melanjuti dari Tutorial 2, saya telah melaksanakan steps sesuai dengan Tutorial. Namun, mayoritas saya modifikasi menyesuaikan Tugas 3 yang telah saya kembangkan.
+   1. Membuat input form untuk menambahkan objek model pada app sebelumnya.
+      Sebelumnya saya telah menambahkan
+      ###
+            import uuid
+      ###
+      pada file models.py untuk mengubah menjadi UUID.
+      Kemudian, saya menambahkan berkas forms.py di dalam main yang berisi:
+      ###
+            from django.forms import ModelForm
+            from main.models import ProductEntry
+            
+            class ProductEntryForm(ModelForm):
+                class Meta:
+                    model = ProductEntry
+                    fields = ["name", "price", "description"]
+      ###
+   3. Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
+      Pada direktori main, di dalam file views.py, saya menambahkan kode:
+      ###
+            from django.shortcuts import render, redirect
+            from main.forms import ProductEntryForm
+            from main.models import ProductEntry
+            from .models import ProductEntry
+            from django.http import HttpResponse
+            from django.core import serializers
+            
+            # Create your views here.
+            def show_main(request):
+                product_entries = ProductEntry.objects.all()
+                context = {'product_entries' : product_entries}
+                return render(request, "main.html",context)
+            
+            def show_model_main(request):
+                return render(request, "model_main.html") 
+            
+            def show_static_main(request):
+                return render(request, "static_main.html")
+            
+            def create_product_entry(request):
+                form = ProductEntryForm(request.POST or None)
+
+                if form.is_valid and request.method == "POST":
+                    form.save()
+                    return redirect('main:show_main')
+                
+                context = {'form': form}
+                return render(request, "create_product_entry.html", context)
+
+            def show_xml(request):
+                data = ProductEntry.objects.all()
+                return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+            
+            def show_json(request):
+                data = ProductEntry.objects.all()
+                return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+            
+            def show_xml_by_id(request, id):
+                data = ProductEntry.objects.filter(pk=id)
+                return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+            
+            def show_json_by_id(request, id):
+                data = ProductEntry.objects.filter(pk=id)
+                return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+      ###
+      dengan mengimport ProductEntry langsung dari models.py.
+
+      Untuk menampilkan kode dalam web, saya menambahkan kode pada berkas main.html:
+      ###
+            {% if not product_entries %}
+            <p>Belum ada data product pada Biyung Cafe.</p>
+            {% else %}
+            <table class="putih">
+              <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Description</th>
+              </tr>
+            
+              {% comment %} Berikut cara memperlihatkan data product di bawah baris ini 
+              {% endcomment %} 
+              {% for product_entry in product_entries %}
+              <tr>
+                <td>{{product_entry.id}}</td>
+                <td>{{product_entry.name}}</td>
+                <td>{{product_entry.price}}</td>
+                <td>{{product_entry.description}}</td>
+              </tr>
+              {% endfor %}
+            </table>
+            {% endif %}
+            
+            <br />
+            
+            <a href="{% url 'main:create_product_entry' %}">
+              <button>Add New Product Entry</button>
+            </a>
+            {% endblock content %}
+      ###
+   5. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
+      Untuk mengakses fungsi yang telah ditambah sebelumnya, saya tambahkan kode pada berkas urls.py:
+      ###
+            from django.urls import path
+            from main.views import show_main, show_model_main, show_static_main, create_product_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+            
+            
+            
+            
+            app_name = 'main'
+            
+            urlpatterns = [
+                path('', show_main, name='show_main'),
+                path('model/', show_model_main, name='show_model_main'),
+                path('static/', show_static_main, name='show_static_main'),
+                path('create-product-entry', create_product_entry, name='create_product_entry'),
+                path('xml/', show_xml, name='show_xml'),
+                path('json/', show_json, name='show_json'),
+                path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+                path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+]
+      ###
