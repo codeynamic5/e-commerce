@@ -184,19 +184,55 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
       Data delivery dapat menghubungkan komponen-komponen yang terpisah, seperti front-end dan back-end. Sehingga, data yang diproses dan kemudian ditampilkan dapat diolah dengan lancar oleh server hingga bekerja secara optimal.
 
    ### Referensi
-      Hill, J. (2021). Efficient Data Delivery for Modern Applications. O'Reilly Media. 
-
+   ~~~
+      Hill, J. (2021). Efficient Data Delivery for Modern Applications. O'Reilly Media.
+   ~~~
+      
  
 ## Perbandingan antara XML dan JSON. Mengapa JSON lebih populer dibandingkan XML?
-   ### XML (eXtensible Markup Language)
-      
-      
-   ### JSON (JavaScript Object Notation)
+   ### Struktur dan Format
+        - XML (eXtensible Markup Language)
+         XML menggunakan format tag yang panjang. Hal tersebut membuat program lebih kompleks dan ukuran file besar.
+        - JSON (JavaScript Object Notation)
+         JSON memiliki struktur dan format yang lebih sederhana dan ringkas karena JSON menggunakan format dengan notasi berbasis objek, yang mirip dengan JavaScript.
+   ### Kecepatan Program
+      - XML (eXtensible Markup Language)
+         Dikarenakan XML memiliki struktur program yang kompleks sehingga menyebabkan program berjalan dengan lebih lambat.
+      - JSON (JavaScript Object Notation)
+         JSON memiliki format yang lebih ringan sehingga program berjalan lebih cepat dan mudah.
+   ### Web Development Compatibility
+      - XML (eXtensible Markup Language)
+         Penggunaan XML dalam web platform lebih minim dibandingkan JSON.
+      - JSON (JavaScript Object Notation)
+         JSON memiliki compatibility banyak dalam menggunakan web development. JSON banyak diadopsi oleh berbagai API modern dan layanan web yang canggih dengan framework dan teknologi yang luas.
+   ### Ukuran
+      - XML (eXtensible Markup Language)
+         XML memproses lebih banyak kode dibandingkan dengan JSON.
+      - JSON (JavaScript Object Notation)
+         JSON mentransfer data lebih cepat karena memiliki format lebih kecil dibandingkan XML.
+   ### Di atas merupakan beberapa alasan mengapa JSON lebih populer dibandingkan XML. Mulai dari kapabilitas yang dapat memproses program dengan lebih efisien dan cepat dibandingkan XML.
 
  
 ## Fungsi dari method is_valid() pada Form Django dan Mengapa kita Membutuhkan Method tersebut?
+   ### Fungsi is_valid()
+      1. Method is_valid() dalam Django digunakan untuk memeriksa validasi data yang diinput dalam form.
+      2. Membersihkan dan menyimpan data yang telah terbutkti valid sesuai pemeriksaan yang telah dilakukan sebelumnya.
+      3. Mengidentifikasi error yang dapat terjadi apabila data yang diinput False.
+   ### Alasan Mengapa Membutuhkan Method is_valid()
+      Method is_valid() dibutuhkan karena validasi data input mudah dan otomatis dengan keamanan data yang memastikan privasi yang terjaga/tersimpan dengan baik. Dengan method tersebut, Django memungkinkan untuk memberikan feedback dengan jelas kepada pengguna sehingga pengguna mengetahui kesalahan yang terjadi dalam form input.
+   ### Referensi
+      - Django Documentation. *"Form and field validation"* (n.d.). Retrieved from [Django Official Documentation](https://docs.djangoproject.com/en/stable/ref/forms/api/#django.forms.Form.is_valid)
+      - Vincent, A. (2020). *"Building Secure Web Forms with Django."*
  
 ## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
-
-
+   ### Alasan membutuhkan csrf_token saat membuat form di Django
+      1. Perlindungan dari Serangan CSRF. Dengan token CSRF, mekanisme yang digunakan dapat melindungi aplikasi web dari serangan Cross-Site Request Forgery.
+      2. Validitas Permintaan. Permintaan POST dapat dipastikan oleh CSRF berasal dari pengguna yang valid untuk mengakses web secara langsung.
+   ### Akibat tidak menambahkan csrf_token pada form Django
+      Apabila csrf_token tidak ditambahkan pada form Django, dapat terjadi breach pada form Django tersebut. Tanpa adanya csrf_token, form Django rentan terhadap berbagai serangan luar, di mana penyerang mengirim sebuah permintaan atas nama pengguna tanpa sepengetahuan pengguna. Penyerang tersebut dapat menggunakan sesi aktif pengguna asli untuk mengirimkan sebuah pengiriman palsu, seperti pencurian data atau melakukan transaksi terlarang.
+   ### Pemanfaatan kehilangan csrf_token pada form Django oleh penyerang
+      - Eksploitasi Sesi Aktif Pengguna 
+         Dengan hilangnya token CSRF, penyerang dapat memanfaatkan sesi aktif pengguna karena tidak ada keamanan yang tersedia sehingga dapat masuk dan mengirim sebuah permintaan yang palsu.
+      - Pembuatan Permintaan Palsu Otentik
+         Tanpa token CSRF, web akan dengan mudah diserang dengan pembuatan sebuah permintaan palsu yang tidak dapat diperiksa perbedaan antara yang asli dan yang palsu. Pembuatan permintaan tersebut tanpa sepengetahuan pengguna.
 ## Implementasi Checklist secara Step-by-Step
