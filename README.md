@@ -359,7 +359,16 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
                ]
       ###
 
-## Screenshot dari hasil akses URL pada Postman
+## Screenshot dari hasil akses URL pada Postman 
 
-   ### show_xml
-      <img width="1800" alt="Screenshot 2024-09-18 at 03 56 33" src="https://github.com/user-attachments/assets/363025dc-34c3-4ba6-b7f5-1fcdf9422c78">
+   ### show_xml 
+   <img width="1800" alt="Screenshot 2024-09-18 at 03 56 33" src="https://github.com/user-attachments/assets/8b037533-6d2d-4a25-9d92-33086c46c75f">
+
+   ### show_json
+   <img width="1800" alt="Screenshot 2024-09-18 at 03 56 44" src="https://github.com/user-attachments/assets/c96a15ad-e300-4926-a020-851227156a4a">
+
+   ### show_xml_id
+   <img width="1800" alt="Screenshot 2024-09-18 at 03 57 23" src="https://github.com/user-attachments/assets/351a8864-518b-4265-94b6-7fa74e1170af">
+
+   ### show_json_id
+   <img width="1800" alt="Screenshot 2024-09-18 at 03 56 56" src="https://github.com/user-attachments/assets/bbca1579-f73d-41bb-96a1-598782fd271f">
