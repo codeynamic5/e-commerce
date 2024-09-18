@@ -169,14 +169,34 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 
 # Tugas 3
 
-## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+## Alasan Kenapa Data Delivery Dibutuhkan dalam Pengimplementasian sebuah Platform
+   ### Data Delivery
+   Proses pengiriman (transfer) data dari satu titik ke titik lain dalam jaringan atau sistem informasi. Pada saat mengimplementasikan sebuah platform yang berbasis web atau mobile, ada beberapa alasan mengapa data delivery dibutuhkan:
+   1. Data yang Disediakan dengan Real-Time
+      Data delivery yang cepat dan efisien memungkinkan penyediaan data atau informasi lebih akurat dan instan.
+   2. Keamanan Data
+      Proses keamanan data delivery memungkinkan informasi pribadi dan sensitif dapat terjaga dengan protokol keamanan seperti enkripsi yang memastikan data tersebut tidak bocor selamam proses pengiriman.
+   3. User Experience
+      Pengalaman pengguna dapat menjadi optimal dikarenakan data delivery yang cepat dan canggih. Contohnya adalah halaman web yang telah dimodifikasi untuk mempunyai data delivery yang efisien dan bagus sehingga pengalaman pengguna dalam menggunakan web tersebut sangat mengesankan.
+   4. Skalabilitas
+      Dalam sebuah platform, banyaknya pengguna dalam menggunakan data dapat mengakibatkan lambatnya sebuah platform memproses semuanya. Oleh karena itu, penggunaan data delivery dibutuhkan untuk menampung berbagai informasi dan data yang diproses dan memastikan performa yang maksimal.
+   5. Konektivitas
+      Data delivery dapat menghubungkan komponen-komponen yang terpisah, seperti front-end dan back-end. Sehingga, data yang diproses dan kemudian ditampilkan dapat diolah dengan lancar oleh server hingga bekerja secara optimal.
 
+   ### Referensi
+      Hill, J. (2021). Efficient Data Delivery for Modern Applications. O'Reilly Media. 
 
  
-## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+## Perbandingan antara XML dan JSON. Mengapa JSON lebih populer dibandingkan XML?
+   ### XML (eXtensible Markup Language)
+      
+      
+   ### JSON (JavaScript Object Notation)
+
  
-## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+## Fungsi dari method is_valid() pada Form Django dan Mengapa kita Membutuhkan Method tersebut?
  
 ## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
 
-## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+## Implementasi Checklist secara Step-by-Step
