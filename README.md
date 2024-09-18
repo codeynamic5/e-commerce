@@ -372,3 +372,19 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 
    ### show_json_id
    <img width="1800" alt="Screenshot 2024-09-18 at 03 56 56" src="https://github.com/user-attachments/assets/bbca1579-f73d-41bb-96a1-598782fd271f">
+
+
+
+
+
+# Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django
+
+## Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+
+## Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+
+## Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+
+## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
