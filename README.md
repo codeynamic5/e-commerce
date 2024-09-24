@@ -381,7 +381,7 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 
 ## 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
    Dalam Django, HttpResponseRedirect() dan redirect() keduanya digunakan untuk mengarahkan user ke URL lain. Namun, ada beberapa perbedaan dari keduanya:
-   Perbedaan Utama:
+   **Perbedaan Utama:**
       |           HttpResponseRedirect()          |               redirect()               |
       |-------------------------------------------|----------------------------------------|
       | spesifik menerima URL dalam bentuk string | fleksibel, menerima URL, views, models |            
@@ -398,7 +398,13 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 | Row 2    | Data 3   | Data 4   |
 
 ## 2. Jelaskan cara kerja penghubungan model Product dengan User!
-
+   Dalam menghubungkan model Product dan User di Django, biasanya menggunakan ForeignKey untuk memberikan produk user sebuah tanda kepemilikian.
+   <br /> **Cara Kerja:** <br />
+   1. Menentukan Model User &rarr; 2. Membuat Model Product &rarr; 3. Memodifikasi Views &rarr; 4. Memodifikasi Template
+   1. Django memiliki model User sendiri yang biasanya digunakan dengan model untuk membuat sebuah relasi.
+   2. Pembuatan model product menggunakan ForeignKey untuk menghubungkan ke User. Foreignkey menggunakan parameter on_delete yang menentukan tindakan pada saat data pengguna dihapus.
+   3. Apabila model telah terhubung, selanjutnya adalah memodifikasi kode dalam views untuk membuat atau mengambil produk yang dimiliki oleh user spesifik.
+   4. Dalam menampilkan sebuah produk yang dimiliki oleh user tertentu di template, kode html yang di dalam template dapat dimodifikasi sesuai dengan desain yang akan ditampilkan pada saat login. Dari situ, user yang telah login dapat mengakses semua produk yang dimilikinya.  
 
 ## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
 
