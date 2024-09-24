@@ -390,13 +390,15 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
    - HttpResponseRedirect() biasanya digunakan apabila ingin melakukan redirect ke URL dengan tujuan yang lebih spesifik. URL yang diberikan harus dalam bentuk string lengkap atau objek dari URL.
    ### redirect()
    - redirect() adalah sebuah fungsi shortcut yang digunakan untuk mengarahkan user. Sebenarnya, fungsi redirect() menggunakan HttpResponseRedirect() di dalamnya. Namun, redirect() memiliki opsi yang lebih bervariasi.
-   - Fungsi ini dapat digunakan untuk mengarahkan ke berbagai hal, seperti URL dalam bentuk string, tampilan nama dalam view yang dapat dimodifikasi di urls.py, dan mengedit objek model. 
+   - Fungsi ini dapat digunakan untuk mengarahkan ke berbagai hal, seperti URL dalam bentuk string, tampilan nama dalam view yang dapat dimodifikasi di urls.py, dan mengedit objek model.
 
-## 2. Jelaskan cara kerja penghubungan model Product dengan User!
 | Header 1 | Header 2 | Header 3 |
 |----------|----------|----------|
 | Row 1    | Data 1   | Data 2   |
 | Row 2    | Data 3   | Data 4   |
+
+## 2. Jelaskan cara kerja penghubungan model Product dengan User!
+
 
 ## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
 
