@@ -400,14 +400,49 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 ## 2. Jelaskan cara kerja penghubungan model Product dengan User!
    Dalam menghubungkan model Product dan User di Django, biasanya menggunakan ForeignKey untuk memberikan produk user sebuah tanda kepemilikian.
    <br /> **Cara Kerja:** <br />
-   1. Menentukan Model User &rarr; 2. Membuat Model Product &rarr; 3. Memodifikasi Views &rarr; 4. Memodifikasi Template
-   1. Django memiliki model User sendiri yang biasanya digunakan dengan model untuk membuat sebuah relasi.
-   2. Pembuatan model product menggunakan ForeignKey untuk menghubungkan ke User. Foreignkey menggunakan parameter on_delete yang menentukan tindakan pada saat data pengguna dihapus.
-   3. Apabila model telah terhubung, selanjutnya adalah memodifikasi kode dalam views untuk membuat atau mengambil produk yang dimiliki oleh user spesifik.
+   1. Menentukan Model User &rarr; 2. Membuat Model Product &rarr; 3. Memodifikasi Views &rarr; 4. Memodifikasi Template <br />
+   <br />
+   1. Django memiliki model User sendiri yang biasanya digunakan dengan model untuk membuat sebuah relasi. <br />
+   2. Pembuatan model product menggunakan ForeignKey untuk menghubungkan ke User. Foreignkey menggunakan parameter on_delete yang menentukan tindakan pada saat data pengguna dihapus. <br />
+   3. Apabila model telah terhubung, selanjutnya adalah memodifikasi kode dalam views untuk membuat atau mengambil produk yang dimiliki oleh user spesifik. <br />
    4. Dalam menampilkan sebuah produk yang dimiliki oleh user tertentu di template, kode html yang di dalam template dapat dimodifikasi sesuai dengan desain yang akan ditampilkan pada saat login. Dari situ, user yang telah login dapat mengakses semua produk yang dimilikinya.  
 
 ## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
-
+   *Authentication* dan *authorization* merupakan konsep keamanan yang sangat krusial dan sering digunakan untuk mengelola akses user pada aplikasi web. Kedua konsep tersebut sering digunakan secara bersama, tetapi memiliki perbedaan yang cukup signifikan. Berikut perbedaan dari keduanya:
+   ### Authentication
+   *Authentication* atau otentikasi merupakan proses verifikasi identitas pengguna yang digunakan sebagai "security measure" untuk mengukur keamanan sebuah user yang sedang melakukan proses login.
+   **Proses:** <br />
+   User yang sedang login akan diverifikasi identitas dan kredensial (username dan password) sesuai dengan informasi yang tersimpan dalam database. Apabila semua data benar atau sesuai, user telah terotentikasi dan dapat mengakses sistem.
+   ### Authorization
+   *Authorization* atau otorisasi merupakan proses setelah otentikasi, yaitu proses memeriksa kembali kredibilitas user. Proses ini menentukan apakah user yang telah terotentikasi memiliki izin untuk melanjutkan akses dalam menggunakan sistem.
+   **Proses:** <br />
+   Setelah melalui proses otentikasi, sistem akan memeriksa kembali hal user dalam menggunakan fitur tertentu dalam sistem tersebut. Sistem akan mengecek apakah user berhak memiliki akses dalam menggunakan halaman admin atau memodifikasi database.
+   ### Proses User Login
+   Proses *Authentication* (Otentikasi) &rarr; Verifikasi Kebenaran Username & Password sesuai Database oleh Django &rarr; Benar, maka User terotentikasi & User dapat menggunakan sistem &rarr; Proses *Authorization* (Otorisasi), memeriksa hak akses user
+   ### Implementasi Authentication & Authorization oleh Django
+   **Authentication oleh Django** <br />
+   Django memiliki sistem otentikasi bawaan yang sangat efisien dengan menangani proses login, logout, register, dan penyimpanan informasi user yang telah terotentikasi dalam sistem.
+   Fitur: <br />
+   - Login = menggunakan `authenticate()` dan `login()` untuk melakukan verifikasi user dan apabila berhasil, membuat sesi untuk user. <br />
+   - Logout = `logout()` untuk mengakhiri sesi user.
+   - Middleware = `AuthenticationMiddleware` digunakan untuk memastikan setiap request yang diterima oleh Django memiliki `request.user`. Hal tersebut adalah agar user dapat terotentikasi.
+   **Authorization oleh Django** <br />
+   Django memiliki *permissions* dan *groups* yang digunakan Django untuk mengatur otorisasi user.
+   Fitur: <br />
+   - Permissions = `add`, `delete`, `change` yang memberikan "izin" kepada user atau *groups*.
+   - Groups = Beberapa *permissions* yang memebentuk kelompok, sehingga dapat lebih mudah dikelola.
+   - User.is_authenticated = memeriksa status login user, apakah sudah login atau belum.
+   - User.has_perm() = memeriksa izin tertentu yang dimiliki user.
+   - @login_required decorator = memastikan halaman yang terbuka hanya bisa diakses oleh user yang telah login.
+   **Contoh Penggunaan Authentication & Authorization oleh Django**
+   - Login form = login form yang digunakan oleh user untuk memasukkan data seperti username dan password dengan memverifikasi kebenaran identitas user.
+   - Otorisasi halaman admin = memastikan otorisasi yang diberikan kepada user adalah user yang telah melakukan login, sehingga user dapat mengakses halaman tertentu.
+   
 ## 4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+   ### Cara Django Mengingat Pengguna yang Telah Login
+   
+   ### Kegunaan Lain dari Cookies
 
+   ### Keamanan Cookies
+   
 ## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
