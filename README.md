@@ -379,12 +379,29 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 
 # Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django
 
-## Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+## 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
+   Dalam Django, HttpResponseRedirect() dan redirect() keduanya digunakan untuk mengarahkan user ke URL lain. Namun, ada beberapa perbedaan dari keduanya:
+      |--------------------------------------------------------------------|
+      |                           Perbedaan Utama                          |
+      |--------------------------------------------------------------------|
+      | HttpResponseRedirect() | spesifik menerima URL dalam bentuk string |
+      | redirect()             | fleksibel, menerima URL, views, models    |
+      |--------------------------------------------------------------------|
+   ### HttpResponseRedirect()
+   - HttpResponseRedirect() adalah kelas bawaan Django. Biasanya digunakan untuk menampilkan status respons kode HTTP 302 (redirection) dan URL tujuan request dari user.
+   - HttpResponseRedirect() biasanya digunakan apabila ingin melakukan redirect ke URL dengan tujuan yang lebih spesifik. URL yang diberikan harus dalam bentuk string lengkap atau objek dari URL.
+   ### redirect()
+   - redirect() adalah sebuah fungsi shortcut yang digunakan untuk mengarahkan user. Sebenarnya, fungsi redirect() menggunakan HttpResponseRedirect() di dalamnya. Namun, redirect() memiliki opsi yang lebih bervariasi.
+   - Fungsi ini dapat digunakan untuk mengarahkan ke berbagai hal, seperti URL dalam bentuk string, tampilan nama dalam view yang dapat dimodifikasi di urls.py, dan mengedit objek model. 
 
-## Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+## 2. Jelaskan cara kerja penghubungan model Product dengan User!
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Row 1    | Data 1   | Data 2   |
+| Row 2    | Data 3   | Data 4   |
 
-## Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
 
-## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+## 4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
 
-## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
