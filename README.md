@@ -381,10 +381,10 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 
 ## 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
    Dalam Django, HttpResponseRedirect() dan redirect() keduanya digunakan untuk mengarahkan user ke URL lain. Namun, ada beberapa perbedaan dari keduanya:
-      |                           Perbedaan Utama                          |
-      |--------------------------------------------------------------------|
-      | HttpResponseRedirect() | spesifik menerima URL dalam bentuk string |
-      | redirect()             | fleksibel, menerima URL, views, models    |
+   Perbedaan Utama:
+      |           HttpResponseRedirect()          |               redirect()               |
+      |-------------------------------------------|----------------------------------------|
+      | spesifik menerima URL dalam bentuk string | fleksibel, menerima URL, views, models |            
    ### HttpResponseRedirect()
    - HttpResponseRedirect() adalah kelas bawaan Django. Biasanya digunakan untuk menampilkan status respons kode HTTP 302 (redirection) dan URL tujuan request dari user.
    - HttpResponseRedirect() biasanya digunakan apabila ingin melakukan redirect ke URL dengan tujuan yang lebih spesifik. URL yang diberikan harus dalam bentuk string lengkap atau objek dari URL.
