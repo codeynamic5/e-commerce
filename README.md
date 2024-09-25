@@ -382,20 +382,15 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
 ## 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
    Dalam Django, HttpResponseRedirect() dan redirect() keduanya digunakan untuk mengarahkan user ke URL lain. Namun, ada beberapa perbedaan dari keduanya:
    **Perbedaan Utama:**
-      |           HttpResponseRedirect()          |               redirect()               |
-      |-------------------------------------------|----------------------------------------|
-      | spesifik menerima URL dalam bentuk string | fleksibel, menerima URL, views, models |            
+|           HttpResponseRedirect()          |                redirect()              |
+|-------------------------------------------|----------------------------------------|
+| spesifik menerima URL dalam bentuk string | fleksibel, menerima URL, views, models |
    ### HttpResponseRedirect()
    - HttpResponseRedirect() adalah kelas bawaan Django. Biasanya digunakan untuk menampilkan status respons kode HTTP 302 (redirection) dan URL tujuan request dari user.
    - HttpResponseRedirect() biasanya digunakan apabila ingin melakukan redirect ke URL dengan tujuan yang lebih spesifik. URL yang diberikan harus dalam bentuk string lengkap atau objek dari URL.
    ### redirect()
    - redirect() adalah sebuah fungsi shortcut yang digunakan untuk mengarahkan user. Sebenarnya, fungsi redirect() menggunakan HttpResponseRedirect() di dalamnya. Namun, redirect() memiliki opsi yang lebih bervariasi.
    - Fungsi ini dapat digunakan untuk mengarahkan ke berbagai hal, seperti URL dalam bentuk string, tampilan nama dalam view yang dapat dimodifikasi di urls.py, dan mengedit objek model.
-
-| Header 1 | Header 2 | Header 3 |
-|----------|----------|----------|
-| Row 1    | Data 1   | Data 2   |
-| Row 2    | Data 3   | Data 4   |
 
 ## 2. Jelaskan cara kerja penghubungan model Product dengan User!
    Dalam menghubungkan model Product dan User di Django, biasanya menggunakan ForeignKey untuk memberikan produk user sebuah tanda kepemilikian.
@@ -463,4 +458,175 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
    
 ## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 Seperti tugas-tugas sebelumnya, saya menggunakan Tutorial, dalam kasus ini adalah Tutorial 3, sebagai fondasi dari Tugas 4 dengan mode yang telah dimodifikasi sesuai aplikasi yang saya kembangkan.
-1. 
+1. Mengimplementasikan Fungsi Registrasi, Login, dan Logout
+   - Membuat Form Registrasi
+     Untuk membuat form registrasi dapat menggunakan `UserCreationForm` yang ada di dalam Django. Saya memodifikasi beberapa file, yaitu `views.py` dan `urls.py`. Saya menambahkan file baru di templates yaitu `register.html`
+     **views.py**:
+     ```
+      def register(request):
+          form = UserCreationForm()
+      
+          if request.method == "POST":
+              form = UserCreationForm(request.POST)
+              if form.is_valid():
+                  form.save()
+                  messages.success(request, 'Your account has been successfully created!')
+                  return redirect('main:login')
+          context = {'form':form}
+          return render(request, 'register.html', context)
+     ```
+     **urls.py**
+     ```
+      urlpatterns = [
+          path('', show_main, name='show_main'),
+          path('model/', show_model_main, name='show_model_main'),
+          path('static/', show_static_main, name='show_static_main'),
+          path('create-product-entry', create_product_entry, name='create_product_entry'),
+          path('xml/', show_xml, name='show_xml'),
+          path('json/', show_json, name='show_json'),
+          path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+          path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+          path('register/', register, name='register'),
+          path('login/', login_user, name='login'),
+          path('logout/', logout_user, name='logout'),
+      ]
+     ```
+     **register.html**
+     ```
+         {% extends 'base.html' %}
+
+         {% block meta %}
+         <title>Register</title>
+         {% endblock meta %}
+         
+         {% block content %}
+         
+         <div class="login">
+           <h1>Register</h1>
+         
+           <form method="POST">
+             {% csrf_token %}
+             <table>
+               {{ form.as_table }}
+               <tr>
+                 <td></td>
+                 <td><input type="submit" name="submit" value="Daftar" /></td>
+               </tr>
+             </table>
+           </form>
+         
+           {% if messages %}
+           <ul>
+             {% for message in messages %}
+             <li>{{ message }}</li>
+             {% endfor %}
+           </ul>
+           {% endif %}
+         </div>
+         
+         {% endblock content %}
+     ```
+   - Mengimplementasikan Login dan Logout
+     Di dalam `views.py` saya menambahkan fungsi `login_user` dan `logout_user` dengan menambahkan file html baru di dalam templates.
+     **views.py**
+     `login_user`
+     ```
+      def login_user(request):
+         if request.method == 'POST':
+            form = AuthenticationForm(data=request.POST)
+      
+            if form.is_valid():
+                  user = form.get_user()
+                  login(request, user)
+                  response = HttpResponseRedirect(reverse("main:show_main"))
+                  response.set_cookie('last_login', str(datetime.datetime.now()))
+                  return response
+      
+         else:
+            form = AuthenticationForm(request)
+         context = {'form': form}
+         return render(request, 'login.html', context)
+     ```
+     `logout_user`
+     ```
+     def logout_user(request):
+       logout(request)
+       response = HttpResponseRedirect(reverse('main:login'))
+       response.delete_cookie('last_login')
+       return response
+     ```
+     `login.html`
+     ```
+      {% extends 'base.html' %}
+
+      {% block meta %}
+      <title>Login</title>
+      {% endblock meta %}
+      
+      {% block content %}
+      <div class="login">
+        <h1>Login</h1>
+      
+        <form method="POST" action="">
+          {% csrf_token %}
+          <table>
+            {{ form.as_table }}
+            <tr>
+              <td></td>
+              <td><input class="btn login_btn" type="submit" value="Login" /></td>
+            </tr>
+          </table>
+        </form>
+      
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} Don't have an account yet?
+        <a href="{% url 'main:register' %}">Register Now</a>
+      </div>
+      
+      {% endblock content %}
+     ```
+     Untuk mengakses logout button, saya menambahkan kode di main.html dalam folder templates:
+     ```
+      <a href="{% url 'main:logout' %}">
+        <button>Logout</button>
+      </a>
+     ```
+2. Membuat Dua Akun Pengguna dengan Masing-masing Tiga *Dummy* Data
+   **Pengguna abellacantik123**
+   <img width="1800" alt="Screenshot 2024-09-25 at 08 53 42" src="https://github.com/user-attachments/assets/cdd09ccd-9d50-4277-81d2-b6dd558786d5">
+
+   **Pengguna abellahebat321**
+   
+4. Menghubungkan Model Product dengan User
+   Untuk menampilkan product dengan user yang login, saya memodifikasi beberapa file:
+   **models.py**
+   ```
+      class ProductEntry(models.Model):
+   
+          user = models.ForeignKey(User, on_delete=models.CASCADE)
+          
+   ```
+   Menggunakan `ForeignKey` 
+   **views.py**
+   ```
+      @login_required(login_url='/login')
+      def show_main(request):
+          product_entries = ProductEntry.objects.filter(user=request.user)
+          context = {'product_entries' : product_entries, 'name': request.user.username, 'last_login': request.COOKIES['last_login']}
+          return render(request, "main.html",context)
+   ```
+   Mengubah product_entries
+   **settings.py**
+   ```
+      PRODUCTION = os.getenv("PRODUCTION", False)
+      DEBUG = not PRODUCTION
+   ```
+6. Menampilkan Detail Informasi Pengguna yang Sedang Logged In
+   - Menampilkan Username di Halaman Utama
+      
+   - Menampilkan Cookies Seperti Last Login
