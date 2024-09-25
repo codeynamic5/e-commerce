@@ -422,27 +422,45 @@ Model pada Django disebut sebagai ORM (Object-Relational Mapping) adalah karena 
    ### Implementasi Authentication & Authorization oleh Django
    **Authentication oleh Django** <br />
    Django memiliki sistem otentikasi bawaan yang sangat efisien dengan menangani proses login, logout, register, dan penyimpanan informasi user yang telah terotentikasi dalam sistem.
-   Fitur: <br />
+   <br /> Fitur: <br />
    - Login = menggunakan `authenticate()` dan `login()` untuk melakukan verifikasi user dan apabila berhasil, membuat sesi untuk user. <br />
    - Logout = `logout()` untuk mengakhiri sesi user.
    - Middleware = `AuthenticationMiddleware` digunakan untuk memastikan setiap request yang diterima oleh Django memiliki `request.user`. Hal tersebut adalah agar user dapat terotentikasi.
-   **Authorization oleh Django** <br />
+   
+   <br /> **Authorization oleh Django** <br />
    Django memiliki *permissions* dan *groups* yang digunakan Django untuk mengatur otorisasi user.
-   Fitur: <br />
+   <br /> Fitur: <br />
    - Permissions = `add`, `delete`, `change` yang memberikan "izin" kepada user atau *groups*.
    - Groups = Beberapa *permissions* yang memebentuk kelompok, sehingga dapat lebih mudah dikelola.
    - User.is_authenticated = memeriksa status login user, apakah sudah login atau belum.
    - User.has_perm() = memeriksa izin tertentu yang dimiliki user.
    - @login_required decorator = memastikan halaman yang terbuka hanya bisa diakses oleh user yang telah login.
-   **Contoh Penggunaan Authentication & Authorization oleh Django**
+   
+   <br /> **Contoh Penggunaan Authentication & Authorization oleh Django** <br />
    - Login form = login form yang digunakan oleh user untuk memasukkan data seperti username dan password dengan memverifikasi kebenaran identitas user.
    - Otorisasi halaman admin = memastikan otorisasi yang diberikan kepada user adalah user yang telah melakukan login, sehingga user dapat mengakses halaman tertentu.
    
 ## 4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
    ### Cara Django Mengingat Pengguna yang Telah Login
+   User yang berhasil login akan diberikan sesi oleh Django dan menyimpan user dalam database. Dengan menggunakan cookies, Django dapat menghubungkan user dengan sesi browser.
+   <br /> **Proses:** <br />
+   - Login user yang berhasil dibuatkan sesi khusus untuk user dan menyimpan data (*session ID*) dalam server.
+   - Django mengirim *session ID* tersebut ke browser dalam bentuk `cookie`.
+   - Setiap *request* dari user akan dikirim dalam bentuk `cookie` oleh browser ke server.
+   - *Session ID* yang diterima dari cookie akan digunakan oleh Django untuk mencari data sesi yang sesuai di server. Apabila Django menemukan data yang sesuai dan mengetahui informasi user, nanti akan memuat data user seperti informasi login.
    
    ### Kegunaan Lain dari Cookies
+   `Cookies` adalah file kecil yang disimpan di browser user dan biasanya dikirim oleh server. `Cookies` memiliki berbagai kegunaan, seperti berikut: 
+   - *Authentication* = `Cookies` digunakan sebagai tempat untuk menyimpan *session ID* user yang telah berhasil login.
+   - Melacak Aktivitas User = Banyak situs web menggunakan `cookies` untuk melacak aktivitas user dalam web tersebut. Data dari aktivitas digunakan untuk analisis algoritma target pasar.
+   - *Shopping Bag* = Situs *E-Commerce* sering menggunakan `cookies` untuk menyimpan produk dalam sebuah 'kerangjang belanja'. User yang menemukan produk atau barang yang diinginkan dapat memasukkan barang tersebut ke dalam keranjang belanja untuk nantinya dapat diproses apabila ingin dibeli. Sehingga, user tidak kehilangan daftar produk yang telah disimpan saat berpindah halaman.
 
    ### Keamanan Cookies
+   Tidak semua `cookies` aman digunakan. Berikut adalah beberapa masalah keamanan terkait dengan cookies:
+   - *Session Hijacking* = Pencurian *session ID* oleh pihak luar karena *session ID* yang tidak diamankan dengan benar.
+   - XSS (*Cross-Site Scripting*) = Penyisipan skrip berbahaya dalam situs web yang dapat mencuri cookies user, sehingga pihak luar dapat menggunakan cookies tersebut untuk login ke akun user sebenarnya.
+   - Cookies yang Tidak Terenkripsi = Penyerangan cookies melalui HTTP (koneksi tidak aman) yang dapay menyebabkan kebocoran data.
    
 ## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Seperti tugas-tugas sebelumnya, saya menggunakan Tutorial, dalam kasus ini adalah Tutorial 3, sebagai fondasi dari Tugas 4 dengan mode yang telah dimodifikasi sesuai aplikasi yang saya kembangkan.
+1. 
