@@ -603,7 +603,7 @@ Seperti tugas-tugas sebelumnya, saya menggunakan Tutorial, dalam kasus ini adala
    **Pengguna abellahebat321**
    <img width="1800" alt="Screenshot 2024-09-25 at 09 20 05" src="https://github.com/user-attachments/assets/c9839ee6-8246-46c4-813a-84a66096cd2a">
 
-4. Menghubungkan Model Product dengan User
+3. Menghubungkan Model Product dengan User
    Untuk menampilkan product dengan user yang login, saya memodifikasi beberapa file:
    **models.py**
    ```
@@ -627,7 +627,17 @@ Seperti tugas-tugas sebelumnya, saya menggunakan Tutorial, dalam kasus ini adala
       PRODUCTION = os.getenv("PRODUCTION", False)
       DEBUG = not PRODUCTION
    ```
-6. Menampilkan Detail Informasi Pengguna yang Sedang Logged In
-   - Menampilkan Username di Halaman Utama
-      
-   - Menampilkan Cookies Seperti Last Login
+4. Menampilkan Detail Informasi Pengguna yang Sedang Logged In
+   Saya memodifikasi `file main.html` dengan memasukkan `name` dari user yang sedang menjalani sesi login, dalam kasus ini adalah abellahebat321. Implementasi file main.html adalah dari berkas `views.py` untuk menampilkan user:
+   ```
+      def show_main(request):
+          product_entries = ProductEntry.objects.filter(user=request.user)
+          context = {'product_entries' : product_entries, 'name': request.user.username, 'last_login': request.COOKIES['last_login']}
+          return render(request, "main.html",context)
+   ```
+   **Tampilan User Login**
+   <img width="1800" alt="Screenshot 2024-09-25 at 09 30 00" src="https://github.com/user-attachments/assets/dc400e5f-7d4b-414d-8e20-1fae23db2ecd">
+
+   **Inspect Cookies**
+   <img width="1800" alt="Screenshot 2024-09-25 at 09 31 32" src="https://github.com/user-attachments/assets/f80b1cb3-8f72-4434-be9d-9fc18ae54d9c">
+
