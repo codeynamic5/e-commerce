@@ -597,11 +597,12 @@ Seperti tugas-tugas sebelumnya, saya menggunakan Tutorial, dalam kasus ini adala
       </a>
      ```
 2. Membuat Dua Akun Pengguna dengan Masing-masing Tiga *Dummy* Data
-   **Pengguna abellacantik123**
+   <br /> **Pengguna abellacantik123**
    <img width="1800" alt="Screenshot 2024-09-25 at 08 53 42" src="https://github.com/user-attachments/assets/cdd09ccd-9d50-4277-81d2-b6dd558786d5">
 
    **Pengguna abellahebat321**
-   
+   <img width="1800" alt="Screenshot 2024-09-25 at 09 20 05" src="https://github.com/user-attachments/assets/c9839ee6-8246-46c4-813a-84a66096cd2a">
+
 4. Menghubungkan Model Product dengan User
    Untuk menampilkan product dengan user yang login, saya memodifikasi beberapa file:
    **models.py**
