@@ -1,98 +1,93 @@
 {% extends 'base.html' %} {% block content %}
+
+{% load static %}
+
 <html lang="en">
   <head>
-    <title>Biyung Cafe</title>
-
+    <title>Biyung Cafe Home - Items Ordered</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <style>
-      body {
-        background-color: rgba(34, 11, 126, 0.876);
-      }
-      .center {
-        font-family: Arial, Helvetica, sans-serif;
-        text-align: center;
-      }
-      .p1 {
-        font-family: Arial, Helvetica, sans-serif;
-        margin-top: 5px;
-      }
-      .h1 {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 24px;
-      }
-      .h5 {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 18px;
-        margin-top: 15px;
-        margin-bottom: 5px;
-      }
-      .border {
-        border: 2px solid black; /* Visible border */
-        border-radius: 15px; /* Rounded corners */
-        padding: 20px; /* Space inside the box */
-        background-color: white; /* Background color for the box */
-        width: 300px; /* Set width of the box */
-        margin: 0 auto; /* Center the box horizontally */
-      }
-      img {
-        display: block;
-        max-width: 100%;
-        margin-top: 5px;
-      }
-      .putih {
-        color: white;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
   </head>
-  <body>
-    <h1 class="center" style="color: aliceblue">Welcome to Biyung Cafe</h1>
-    <h2 class="center" style="color: aliceblue">Where flavour meets divine</h2>
-    <h3 style="color: aliceblue">Welcome {{ name }} !</h3>
-  </body>
+  <div class="container mt-5">
+    <h1 class="text-center text-light">Welcome to Biyung Cafe</h1>
+    <h2 class="text-center text-light">Where Flavor Meets Divine</h2>
+    <h3 class="text-center text-light">Welcome {{ name }} !</h3>
+  </div>
 </html>
 {% if not product_entries %}
-<p style="color: aliceblue">Belum ada data product pada Biyung Cafe.</p>
+<div class="text-center text-light mt-4">
+  <img
+    src="{% static 'products/no-cheese.png' %}"
+    alt="No Products"
+    class="img-fluid mb-3"
+    style="max-width: 300px"
+  />
+  <p style="color: rgb(243, 247, 251)">
+    Belum ada data product pada Biyung Cafe.
+  </p>
+</div>
+
 {% else %}
-<table class="putih">
-  <tr>
-    <th>Product ID</th>
-    <th>Product Name</th>
-    <th>Price</th>
-    <th>Description</th>
-  </tr>
+<div class="row">
+  <table class="putih">
+    <tr>
+      <th>Product ID</th>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Description</th>
+    </tr>
 
-  {% comment "Berikut cara memperlihatkan data product di bawah baris ini" %}
-  <p>Berikut adalah data product</p>
-  {% endcomment %} {% for product_entry in product_entries %}
-  <tr>
-    <td>{{product_entry.id}}</td>
-    <td>{{product_entry.name}}</td>
-    <td>{{product_entry.price}}</td>
-    <td>{{product_entry.description}}</td>
-    <td>
-      <a href="{% url 'main:edit_product' product_entry.pk %}">
-        <button>Edit</button>
-      </a>
-    </td>
-    <td>
-      <a href="{% url 'main:delete_product' product_entry.pk %}">
-        <button>Delete</button>
-      </a>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
+    {% comment "Berikut cara memperlihatkan data product di bawah baris ini" %}
+    <p>Berikut adalah data product</p>
+    {% endcomment %} 
+    
+    {% for product_entry in product_entries %}
+    <div class="border mb-4">
+      <div class="card h-100 shadow-sm">
+        <!-- Product Image -->
+        <img src="{% static 'products/matcha.jpg' %}" class="card-img-top" alt="{{ product_entry.name }}" style="height: 200px; object-fit: cover;">
+
+        <!-- Product Information -->
+        <div class="card-body">
+          <tr>
+            <td>{{product_entry.id}}</td>
+            <td>{{product_entry.name}}</td>
+            <td>{{product_entry.price}}</td>
+            <td>{{product_entry.description}}</td>
+          </tr>
+            <!-- Action Buttons -->
+            <div class="card-footer d-flex justify-content-between">
+              <tr>
+                <td>
+                  <a href="{% url 'main:edit_product' product_entry.pk %}">
+                    <button class="btn btn-info">Edit</button>
+                  </a>
+                </td>
+                <td>
+                  <a href="{% url 'main:delete_product' product_entry.pk %}">
+                    <button class="btn btn-danger">Delete</button>
+                  </a>
+                </td>
+              </tr>
+            </div>
+            
+        </div>
+    {% endfor %}
+  </table>
+</div>
+
 {% endif %}
-
+<br />
 <br />
 
-<a href="{% url 'main:create_product_entry' %}">
-  <button>Add New Product Entry</button>
-</a>
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
+<div>
+  <a href="{% url 'main:create_product_entry' %}" class="btn btn-success">
+    <button>Add New Product Entry</button>
+  </a>
+  <a href="{% url 'main:logout' %}" class="btn btn-secondary">
+    <button>Logout</button>
+  </a>
+</div>
 <h5 style="color: aliceblue">Sesi terakhir login: {{ last_login }}</h5>
 {% endblock content %}
