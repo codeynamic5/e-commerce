@@ -645,21 +645,21 @@ Seperti tugas-tugas sebelumnya, saya menggunakan Tutorial, dalam kasus ini adala
 # Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS
 ## 1. Urutan Prioritas CSS Selector
 Apabila terdapat beberapa CSS Selector yang terdapat dalam satu elemen HTML, urutan prioritas diatur oleh *specificity* dan *importance*. Dalam kata lain, fungsi CSS selector secara spesifik dan kepentingannya dalam satu elemen HTML. Urutan CSS selector adalah sebagai berikut:
-   1. Inline Styles
-      Sebuah style yang ditulis langsung dalam HTML dan memiliki prioritas tertinggi.
-      `<div class="navbar">`
-   2. ID Selectors
-      ID selectors menggunakan elemen ID dan merupakan selector dengan tingkat prioritas tinggi.
-      `#header {}`
-   3. Class, Attribute, Pseudo-class Selectors
-      Beberapa selector ini memiliki prioritas di bawah ID selectors.
-      Class: `.nav {}`
-      Attribute: `[type="text"] {}`
-      Pseudo-Class: `:hover {}`
-   4. Element & Pseudo-element Selectors
-      Merupakan selecto untuk elemen HTML `p {}` atau elemen pseudo `::before {}`. Biasanya prioritas terendah dalam urutan CSS selectors.
-   5. Universal Selector, Combinators, Inheritance
-      Memiliki prioritas paling rendah.
-      `* {}`
-   6. !important
-      Tanda ini berarti apabila sebuah aturan CSS terdapat `!important`, maka aturan CSS tersebut tidak berlaku atau tidak penting untuk diimplementasikan.
+   1. **Inline Styles**
+      <br />Sebuah style yang ditulis langsung dalam HTML dan memiliki prioritas tertinggi.
+      <br />`<div class="navbar">`
+   2. **ID Selectors**
+      <br />ID selectors menggunakan elemen ID dan merupakan selector dengan tingkat prioritas tinggi.
+      <br />`#header {}`
+   3. **Class, Attribute, Pseudo-class Selectors**
+      <br />Beberapa selector ini memiliki prioritas di bawah ID selectors.
+      <br />Class: `.nav {}`
+      <br />Attribute: `[type="text"] {}`
+      <br />Pseudo-Class: `:hover {}`
+   4. **Element & Pseudo-element Selectors**
+      <br />Merupakan selecto untuk elemen HTML `p {}` atau elemen pseudo `::before {}`. Biasanya prioritas terendah dalam urutan CSS selectors.
+   5. **Universal Selector, Combinators, Inheritance**
+      <br />Memiliki prioritas paling rendah.
+      <br />`* {}`
+   6. **!important**
+      <br />Tanda ini berarti apabila sebuah aturan CSS terdapat `!important`, maka aturan CSS tersebut tidak berlaku atau tidak penting untuk diimplementasikan.
