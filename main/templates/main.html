@@ -30,49 +30,37 @@
 
 {% else %}
 <div class="row">
-  <table class="putih">
-    <tr>
-      <th>Product ID</th>
-      <th>Product Name</th>
-      <th>Price</th>
-      <th>Description</th>
-    </tr>
+
 
     {% comment "Berikut cara memperlihatkan data product di bawah baris ini" %}
     <p>Berikut adalah data product</p>
     {% endcomment %} 
     
     {% for product_entry in product_entries %}
-    <div class="border mb-4">
-      <div class="card h-100 shadow-sm">
-        <!-- Product Image -->
-        <img src="{% static 'products/matcha.jpg' %}" class="card-img-top" alt="{{ product_entry.name }}" style="height: 200px; object-fit: cover;">
-
-        <!-- Product Information -->
+    <div class="col-md-4">
+      <div class="card h-50 shadow-sm">
+  
         <div class="card-body">
-          <tr>
-            <td>{{product_entry.id}}</td>
-            <td>{{product_entry.name}}</td>
-            <td>{{product_entry.price}}</td>
-            <td>{{product_entry.description}}</td>
-          </tr>
+
+            <!-- <td>{{product_entry.id}}</td> -->
+            <h5 class="card-title">{{product_entry.name}}</h5>
+            <p class="card-text">{{product_entry.price}}</p>
+            <p class="card-text">{{product_entry.description}}</p>
+
             <!-- Action Buttons -->
-            <div class="card-footer d-flex justify-content-between">
-              <tr>
-                <td>
+            <div class="card-footer d-flex justify-content-center">
                   <a href="{% url 'main:edit_product' product_entry.pk %}">
                     <button class="btn btn-info">Edit</button>
                   </a>
-                </td>
-                <td>
+
                   <a href="{% url 'main:delete_product' product_entry.pk %}">
                     <button class="btn btn-danger">Delete</button>
                   </a>
-                </td>
-              </tr>
+
             </div>
             
         </div>
+      </div>
     {% endfor %}
   </table>
 </div>

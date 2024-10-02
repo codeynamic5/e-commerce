@@ -56,15 +56,11 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown
+                Menu
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                <li><a class="dropdown-item" href="{% url 'main:show_static_main' %}">Food</a></li>
+                <li><a class="dropdown-item" href="#">Beverages</a></li>
               </ul>
             </li>
           </ul>
@@ -75,10 +71,6 @@
         </div>
       </div>
     </nav>
-
-    <!-- 
-      <a href="{% url 'main:show_static_main' %}">Menu</a>
-      <a href="{% url 'main:login' %}">Login</a> -->
 
     <div style="padding-left: 16px">
       {% block content %} {% endblock content %}
