@@ -663,3 +663,11 @@ Apabila terdapat beberapa CSS Selector yang terdapat dalam satu elemen HTML, uru
       <br />`* {}`
    6. **!important**
       <br />Tanda ini berarti apabila sebuah aturan CSS terdapat `!important`, maka aturan CSS tersebut tidak berlaku atau tidak penting untuk diimplementasikan.
+## 2. Pentingnya Responsive Design dalam Pengembangan Web
+**Responsive Design** adalah sebuah pendekatan yang digunakan dalam web untuk mengatur ukuran layar sehingga dapat menyesuaikan dengan perangkat yang sedang digunakan secara otomatis seperti *handphone*, *tablet*, dan *smartphone*. *Responsive Design* penting untuk pengembangan web karena beberapa alasan:
+- **User Experience**
+<br />Keberagaman perangkat yang digunakan menyebabkan perbedaan dalam ukuran layar, sehingga pengalaman dalam mengimplementasikan sebuah web aplikasi juga berbeda. *Responsive design* menjadi sebuah hal yang esensial agar tampilan web terlihat lebih bagus dan memiliki fungsionalitas yang tepat di berbagai layar dengan berbagai resolusi.
+- **Efisiensi Pengembangan**
+<br />Efektivitas dan efisiensi dalam mengembangkan sebuah web menjadi lebih canggih dengan adanya *responsive design*, yang tadinya pengembangan web dilakukan dari berbagai perangkat untuk menyesuaikan dengan *device* satu per satu. Sekarang, pengembangan web dapat dilakukan dari satu web dan menyesuaikan sesuai dengan perangkat yang digunakan.
+- **SEO (Search Engine Optimization)**
+<br />Prioritas web adalah situs yang *mobile-friendly* dalam hasil pencariannya. Sehingga, website yang responsif akan memiliki visibilitas yang lebih baik dan tinggi.
