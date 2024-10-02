@@ -671,3 +671,8 @@ Apabila terdapat beberapa CSS Selector yang terdapat dalam satu elemen HTML, uru
 <br />Efektivitas dan efisiensi dalam mengembangkan sebuah web menjadi lebih canggih dengan adanya *responsive design*, yang tadinya pengembangan web dilakukan dari berbagai perangkat untuk menyesuaikan dengan *device* satu per satu. Sekarang, pengembangan web dapat dilakukan dari satu web dan menyesuaikan sesuai dengan perangkat yang digunakan.
 - **SEO (Search Engine Optimization)**
 <br />Prioritas web adalah situs yang *mobile-friendly* dalam hasil pencariannya. Sehingga, website yang responsif akan memiliki visibilitas yang lebih baik dan tinggi.
+**Contoh Aplikasi**
+- Sudah Menerapkan *Responsive Design*
+**Twitter**, **Instagram**, **YouTube**. Semua aplikasi tersebut telah menerapkan *responsive design*, di mana tampilan di berbagai perangkat telah disesuaikan dengan perangkat yang dimodifikasikan.
+- Belum Menerapkan *Responsive Design*
+Beberapa situs *e-commerce* yang lama memiliki desain yang belum dikembangkan untuk menyesuaikan dengan perkembangan perangkat yang ada.
