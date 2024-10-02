@@ -695,3 +695,33 @@ Beberapa situs *e-commerce* yang lama memiliki desain yang belum dikembangkan un
         padding: 10px; /* Jarak antara konten dan border */
       }
    ```
+## 4. Konsep Flexbox dan Grid Layout Beserta Kegunaannya
+**Flexbox (Flexible Box Layout)**
+![image](https://github.com/user-attachments/assets/ba71af12-a539-4e2c-bd7b-4d89917c2ea0)
+<br /> **Flexbox** adalah sistem tata letak satu dimensi yang digunakan untuk mengatur item dalam satu arah, antara baris atau kolom. **Flexbox** biasanya digunakan untuk mengatur elemen agar fleksibel dan menyesuaikan dengan ukuran kontainer. 
+<br /> Contoh:
+<br />
+- Item disusun secara otomatis sesuai dengan ruang yang ada seperti stretch, wrap, dll. <br />
+- Alignment secara vertikal atau horizontal: `align-items`, `justify-content` <br />
+- Mengatur urutan item yang fleksibel <br />
+**Contoh Implementasi Flexbox** 
+```
+.container {
+  display: flex;
+  justify-content: space-between; /* Menyebar elemen di antara space */
+  align-items: center; /* Elemen berada di tengah secara vertikal */
+}
+```
+<br />
+
+**Grid Layout**
+![image](https://github.com/user-attachments/assets/0fd4008b-9875-406b-a346-3863150840e7)
+<br />**Grid Layout** adalah sistem tata letak dua dimensi dan cenderung lebih kompleks dari *Flexbox*. Grid memungkinkan pengaturan elemen dalam bentuk baris dan kolom secara bersamaan. Grid digunakan untuk membuat layout yang terstruktur dan memiliki presisi yang lebih dengan menggunakan grid (baris dan kolom). Grid juga memungkinkan pengaturan *layout kompleks* dengan cara yang lebih mudah dan efisien.
+<br /> **Contoh Implementasi Grid Layout**
+```
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolom dengan lebar yang sama */
+  grid-gap: 10px; /* Jarak antar elemen grid */
+}
+```
