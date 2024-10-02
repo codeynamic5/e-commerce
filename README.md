@@ -792,34 +792,49 @@ Saya menggunakan referensi tutorial untuk mengerjakan tugas. Namun, karena saya 
    - Kondisi Jika Tidak Ada Produk
      <br />Jika produk belum ada, tampilkan gambar dan pesan.
      ```
-     {% if not product_entries %}
-      <div class="text-center text-light mt-4">
-        <img src="{% static 'products/no-products.png' %}" alt="No Products" class="img-fluid mb-3" />
-        <p class="text-light">Belum ada produk yang terdaftar pada Biyung Cafe.</p>
-      </div>
-      {% endif %}
+           {% if not product_entries %}
+            <div class="text-center text-light mt-4">
+              <img
+                src="{% static 'products/no-cheese.png' %}"
+                alt="No Products"
+                class="img-fluid mb-3"
+                style="max-width: 300px"
+              />
+              <p style="color: rgb(243, 247, 251)">
+                Belum ada data product pada Biyung Cafe.
+              </p>
+            </div>
      ```
    - Kondisi Jika Ada Produk
-     <br />Tampilkan daftar produk dalam bentuk card menggunakan grid layout, seperti yang sudah dibahas sebelumnya.
+     <br />Tampilkan daftar produk dalam bentuk card menggunakan grid layout, seperti yang sudah dibahas sebelumnya. Dalam file `main.html`:
      ```
-         <div class="product-grid">
-        {% for product_entry in product_entries %}
-        <div class="product-card">
-          <div class="product-details">
-            <h5>{{ product_entry.name }}</h5>
-            <p><strong>Price:</strong> {{ product_entry.price }}</p>
-            <p><strong>Description:</strong> {{ product_entry.description }}</p>
-          </div>
-          <div class="actions">
-            <a href="{% url 'edit_product' product_entry.pk %}" class="btn btn-info">Edit</a>
-            <a href="{% url 'delete_product' product_entry.pk %}" class="btn btn-danger">Delete</a>
-          </div>
+         {% for product_entry in product_entries %}
+          <div class="col-md-4">
+            <div class="card h-50 shadow-sm">
+  
+           <div class="card-body">
+   
+               <!-- <td>{{product_entry.id}}</td> -->
+               <h5 class="card-title">{{product_entry.name}}</h5>
+               <p class="card-text">{{product_entry.price}}</p>
+               <p class="card-text">{{product_entry.description}}</p>
+   
+               <!-- Action Buttons -->
+               <div class="card-footer d-flex justify-content-center">
+                     <a href="{% url 'main:edit_product' product_entry.pk %}">
+                       <button class="btn btn-info">Edit</button>
+                     </a>
+   
+                     <a href="{% url 'main:delete_product' product_entry.pk %}">
+                       <button class="btn btn-danger">Delete</button>
+                     </a>
+   
+               </div>
+               
         </div>
-        {% endfor %}
-      </div>
      ```
    - Bootstrap
-     <br />Gunakan Bootstrap grid system untuk memastikan card tampil responsif di berbagai ukuran layar.
+     <br />Gunakan Bootstrap grid system untuk memastikan card tampil responsif di berbagai ukuran layar. 
      ```
         .product-grid {
            display: grid;
@@ -836,27 +851,54 @@ Saya menggunakan referensi tutorial untuk mengerjakan tugas. Namun, karena saya 
          }
      ```
 4. Membuat Navigasi Bar (Navbar)
-   <br />Buat navbar yang responsif dengan Bootstrap untuk mengakomodasi link ke halaman login, daftar produk, dan tambah produk.
+   <br />Buat navbar yang responsif dengan Bootstrap untuk mengakomodasi link ke halaman login, daftar produk, dan tambah produk. Dalam `base.html`:
    ```
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-     <a class="navbar-brand" href="#">Biyung Cafe</a>
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-     </button>
-     <div class="collapse navbar-collapse" id="navbarNav">
-       <ul class="navbar-nav ml-auto">
-         <li class="nav-item">
-           <a class="nav-link" href="{% url 'main:product_list' %}">Daftar Produk</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="{% url 'main:create_product_entry' %}">Tambah Produk</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="{% url 'main:logout' %}">Logout</a>
-         </li>
-       </ul>
-     </div>
-   </nav>
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Biyung</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'main:show_main' %}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:show_model_main' %}"
+                >History</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Menu
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'main:show_static_main' %}">Food</a></li>
+                <li><a class="dropdown-item" href="#">Beverages</a></li>
+              </ul>
+            </li>
+          </ul>
 
    ```
 
