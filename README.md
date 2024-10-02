@@ -725,3 +725,138 @@ Beberapa situs *e-commerce* yang lama memiliki desain yang belum dikembangkan un
   grid-gap: 10px; /* Jarak antar elemen grid */
 }
 ```
+## Implementasi Checklist Step-by-Step
+Saya menggunakan referensi tutorial untuk mengerjakan tugas. Namun, karena saya menggunakan Bootstrap, saya memodifikasi sendiri beberapa fitur dalam Tugas 5 ini.
+<br />
+1. Implementasikan Fungsi untuk Menghapus dan Mengedit Produk
+   - Membuat View untuk Edit dan Delete Produk
+      <br />Edit Produk:
+     <br />Buat view yang menampilkan form edit untuk produk yang sudah ada. Pada saat form disubmit, update produk di database.
+      <br />Delete Produk:
+     <br />Buat view untuk menghapus produk berdasarkan product_id. Gunakan konfirmasi sebelum produk dihapus (misalnya menggunakan modal konfirmasi).
+   - Implementasi URL Routing
+     <br />Tambahkan routing di urls.py untuk edit dan delete produk:
+     ```
+     path('product/edit/<int:product_id>/', views.edit_product, name='edit_product'),
+     path('product/delete/<int:product_id>/', views.delete_product, name='delete_product'),
+     ```
+   - Template Edit/Delete
+     <br />Di dalam template HTML produk (main.html), buat dua tombol:
+     <br />Tombol Edit mengarahkan pengguna ke halaman edit produk dan Tombol Delete memanggil fungsi penghapusan produk.
+     ```
+     <a href="{% url 'edit_product' product_entry.pk %}" class="btn btn-info">Edit</a>
+      <a href="{% url 'delete_product' product_entry.pk %}" class="btn btn-danger">Delete</a>
+     ```
+2. Kustomisasi Desain Halaman Login, Register, dan Tambah Produk
+   - Halaman Login
+     <br />Gunakan form login Django, kemudian kustomisasikan menggunakan Bootstrap. Tambahkan elemen visual seperti gambar, padding, atau background warna.
+     ```
+     <div class="container mt-5">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h3 class="text-center">Login</h3>
+            </div>
+            <div class="card-body">
+              <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success btn-block">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+     ```
+   - Halaman Add Product
+     <br />Untuk halaman add product, buat form untuk memasukkan data produk (seperti nama produk, harga, dan deskripsi) dan gunakan kelas Bootstrap untuk mempercantik tampilan form.
+     ```
+     <div class="container mt-5">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-header bg-success text-white">
+              <h3 class="text-center">Tambah Produk Baru</h3>
+            </div>
+            <div class="card-body">
+              <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary btn-block">Tambah Produk</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+     ```
+3. Kustomisasi Halaman Daftar Produk
+   - Kondisi Jika Tidak Ada Produk
+     <br />Jika produk belum ada, tampilkan gambar dan pesan.
+     ```
+     {% if not product_entries %}
+      <div class="text-center text-light mt-4">
+        <img src="{% static 'products/no-products.png' %}" alt="No Products" class="img-fluid mb-3" />
+        <p class="text-light">Belum ada produk yang terdaftar pada Biyung Cafe.</p>
+      </div>
+      {% endif %}
+     ```
+   - Kondisi Jika Ada Produk
+     <br />Tampilkan daftar produk dalam bentuk card menggunakan grid layout, seperti yang sudah dibahas sebelumnya.
+     ```
+         <div class="product-grid">
+        {% for product_entry in product_entries %}
+        <div class="product-card">
+          <div class="product-details">
+            <h5>{{ product_entry.name }}</h5>
+            <p><strong>Price:</strong> {{ product_entry.price }}</p>
+            <p><strong>Description:</strong> {{ product_entry.description }}</p>
+          </div>
+          <div class="actions">
+            <a href="{% url 'edit_product' product_entry.pk %}" class="btn btn-info">Edit</a>
+            <a href="{% url 'delete_product' product_entry.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+     ```
+   - Bootstrap
+     <br />Gunakan Bootstrap grid system untuk memastikan card tampil responsif di berbagai ukuran layar.
+     ```
+        .product-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+           gap: 20px;
+         }
+         
+         .product-card {
+           background-color: #fff;
+           padding: 20px;
+           border-radius: 10px;
+           height: 100%;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         }
+     ```
+4. Membuat Navigasi Bar (Navbar)
+   <br />Buat navbar yang responsif dengan Bootstrap untuk mengakomodasi link ke halaman login, daftar produk, dan tambah produk.
+   ```
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+     <a class="navbar-brand" href="#">Biyung Cafe</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarNav">
+       <ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'main:product_list' %}">Daftar Produk</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'main:create_product_entry' %}">Tambah Produk</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'main:logout' %}">Logout</a>
+         </li>
+       </ul>
+     </div>
+   </nav>
+
+   ```
+
