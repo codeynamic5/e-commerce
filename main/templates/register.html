@@ -1,52 +1,52 @@
-{% extends 'base.html' %} {% block meta %}
+{% extends 'base.html' %} {% block meta %} 
 <title>Register</title>
 {% endblock meta %} {% block content %}
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-  <div class="row border rounded-5 p-3 bg-gradient shadow box-area">
-    <div class="col-md-6 d-flex justify-content-center align-items-center flex-column left-box">
-      <div class="card">
-        <div class="card-body">
+  <div class="row border rounded-5 p-5 bg-gradient shadow-lg box-area" style="width: 100%; max-width: 700px;">
+    <div class="col-md-12 d-flex justify-content-center align-items-center flex-column">
+      <div class="outer-box w-100">
+        <div class="login-box text-center d-flex flex-column justify-content-center align-items-center h-100 w-100">
           <h1 class="card-title text-center mb-4">Register</h1>
 
-          <form method="POST">
-            {% csrf_token %}
-
-            <div class="text-center">
-              {{ form.non_field_errors }}
-              <label for="{{ form.username.id_for_label }}" class="form-label"
-                >{{ form.username.label }}:</label
-              >
-              {{ form.username }}
-            </div>
-
-            <div class="text-center">
-              <label for="{{ form.password1.id_for_label }}" class="form-label"
-                >{{ form.password1.label }}:</label
-              >
-              {{ form.password1 }}
-            </div>
-
-            <div class="text-center">
-              <label for="{{ form.password2.id_for_label }}" class="form-label"
-                >{{ form.password2.label }}:</label
-              >
-              {{ form.password2 }}
-            </div>
-
-            <div class="align-items-center">
-              <table>
-                <tr>
-                  <td d-grid>
-                    <input
-                      class="btn btn-primary"
-                      type="submit"
-                      value="Register"
-                    />
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </form>
+          <div lass="input-group mb-3 text-center">
+            <form method="POST" action="" class="w-100">
+              {% csrf_token %}
+              <div class="form-group mb-3">
+                {{ form.non_field_errors }}
+                <!-- Username Field -->
+                <input type="text" name="{{ form.username.name }}" placeholder="Username" class="form-control" required id="{{ form.username.id_for_label }}">
+              </div>
+  
+              <div class="form-group mb-3">
+                <!-- Password Field -->
+                <input type="password" name="{{ form.password1.name }}" placeholder="Password" class="form-control" required id="{{ form.password1.id_for_label }}">
+              </div>
+  
+              <div class="form-group mb-3">
+                <!-- Password Confirmation Field -->
+                <input type="password" name="{{ form.password2.name }}" placeholder="Confirm Password" class="form-control" required id="{{ form.password2.id_for_label }}">
+              </div>
+  
+              <div class="input-group mb-3">
+                <input
+                        class="btn btn-lg btn-primary w-100 fs-6"
+                        type="submit"
+                        value="Register"
+                      />
+              </div>
+                <!-- <table>
+                  <tr>
+                    <td d-grid>
+                      <input
+                        class="btn btn-primary"
+                        type="submit"
+                        value="Register"
+                      />
+                    </td>
+                  </tr>
+                </table> -->
+            </form>
+          </div>
 
           {% if messages %}
           <div class="mt-3">
