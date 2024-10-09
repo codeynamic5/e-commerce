@@ -7,6 +7,12 @@
     <title>Biyung Cafe Home - Items Ordered</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
   </head>
   <div class="container mt-5">
@@ -15,67 +21,150 @@
     <h3 class="text-center text-light">Welcome {{ name }} !</h3>
   </div>
 </html>
-{% if not product_entries %}
-<div class="text-center text-light mt-4">
-  <img
-    src="{% static 'products/no-cheese.png' %}"
-    alt="No Products"
-    class="img-fluid mb-3"
-    style="max-width: 300px"
-  />
-  <p style="color: rgb(243, 247, 251)">
-    Belum ada data product pada Biyung Cafe.
-  </p>
-</div>
 
-{% else %}
-<div class="row">
-
-
-    {% comment "Berikut cara memperlihatkan data product di bawah baris ini" %}
-    <p>Berikut adalah data product</p>
-    {% endcomment %} 
-    
-    {% for product_entry in product_entries %}
-    <div class="col-md-4">
-      <div class="card h-50 shadow-sm">
-  
-        <div class="card-body">
-
-            <!-- <td>{{product_entry.id}}</td> -->
-            <h5 class="card-title">{{product_entry.name}}</h5>
-            <p class="card-text">{{product_entry.price}}</p>
-            <p class="card-text">{{product_entry.description}}</p>
-
-            <!-- Action Buttons -->
-            <div class="card-footer d-flex justify-content-center">
-                  <a href="{% url 'main:edit_product' product_entry.pk %}">
-                    <button class="btn btn-info">Edit</button>
-                  </a>
-
-                  <a href="{% url 'main:delete_product' product_entry.pk %}">
-                    <button class="btn btn-danger">Delete</button>
-                  </a>
-
+<div id="product_entry_cards">
+  <div id="crudModal" tabindex="-1" aria-hidden="true" class="modal fade" role="dialog">
+    <div id="crudModalContent" class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <!-- Modal header -->
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Product Entry</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalBtn">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form id="productEntryForm">
+            <div class="form-group">
+              <label for="product" class="col-form-label">Product</label>
+              <input type="text" id="product" name="product" class="form-control" placeholder="Enter your product" required>
             </div>
-            
+            <div class="form-group">
+              <label for="price" class="col-form-label">Price</label>
+              <textarea id="price" name="price" rows="3" class="form-control" placeholder="Enter the Price" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="Description" class="col-form-label">Description)</label>
+              <input type="text" id="description" name="description" class="form-control" required>
+            </div>
+          </form>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelButton">Cancel</button>
+          <button type="submit" form="productEntryForm" class="btn btn-primary" id="submitProductEntry">Save</button>
         </div>
       </div>
-    {% endfor %}
-  </table>
+    </div>
+  </div>
+  
 </div>
-
-{% endif %}
-<br />
-<br />
 
 <div>
-  <a href="{% url 'main:create_product_entry' %}" class="btn btn-success">
-    <button>Add New Product Entry</button>
+  <a href="{% url 'main:create_product_entry' %}" >
+    <button type="button" id="addProductBtn" class="btn btn-success font-weight-bold my-3 mx-3 rounded-lg ">Add New Product Entry</button>
   </a>
-  <a href="{% url 'main:logout' %}" class="btn btn-secondary">
+  <button type="button" id="addProductByAjaxBtn" class="btn btn-primary font-weight-bold my-3 mx-3 rounded-lg" data-bs-toggle="modal" data-bs-target="#crudModal" >
+    Add New Product Entry by AJAX
+  </button>
+  <!-- <a href="{% url 'main:logout' %}" class="btn btn-secondary">
     <button>Logout</button>
-  </a>
+  </a> -->
 </div>
 <h5 style="color: aliceblue">Sesi terakhir login: {{ last_login }}</h5>
+
+<script>
+  async function getProductEntries(){
+      return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+  }
+
+  async function refreshProductEntries() {
+    document.getElementById("product_entry_cards").innerHTML = "";
+    document.getElementById("product_entry_cards").className = "";
+    const productEntries = await getProductEntries();
+    let htmlString = "";
+    let classNameString = "";
+
+    if (productEntries.length === 0) {
+        classNameString = "d-flex flex-column align-items-center justify-content-center min-vh-50 p-4";
+        htmlString = `
+            <div class="d-flex flex-column align-items-center justify-content-center min-vh-50 p-4">
+                <img src="{% static 'products/no-cheese.png' %}" alt="No Cheese" class="img-fluid mb-4" style="max-width: 8rem;"/>
+                <p class="text-center text-muted mt-4">Belum ada data produk pada Biyung Cafe.</p>
+            </div>
+        `;
+    } else {
+        classNameString = "row g-4";
+        productEntries.forEach((item) => {
+            htmlString += `
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">${item.fields.product}</h5>
+                        <small>${item.fields.time}</small>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Price</h6>
+                        <p class="card-text">${item.fields.price}</p>
+                        <h6 class="card-subtitle mt-4 mb-2 text-muted">Description</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: ${item.fields.description > 10 ? 100 : item.fields.description * 10}%;" aria-valuenow="${item.fields.description}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <small class="text-muted">${item.fields.description > 10 ? '10+' : item.fields.description}</small>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="/edit-product/${item.pk}" class="btn btn-warning btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a href="/delete/${item.pk}" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+    }
+    document.getElementById("product_entry_cards").className = classNameString;
+    document.getElementById("product_entry_cards").innerHTML = htmlString;
+  }
+  refreshProductEntries();
+
+  const modal = new bootstrap.Modal(document.getElementById('crudModal')); // Bootstrap modal instance
+
+  function showModal() {
+      modal.show(); // Menampilkan modal menggunakan Bootstrap method
+  }
+
+  function hideModal() {
+      modal.hide(); // Menyembunyikan modal menggunakan Bootstrap method
+  }
+
+  document.getElementById("cancelButton").addEventListener("click", hideModal);
+  document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+
+  document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("submitProductEntry").addEventListener("click", addProductEntry);
+  
+      function addProductEntry() {
+        fetch("{% url 'main:add_product_entry_ajax' %}", {
+          method: "POST",
+          body: new FormData(document.querySelector("#productEntryForm")),
+        }).then((response) => {
+          if (response.ok) {
+            refreshProductEntries();
+            hideModal(); // Sembunyikan modal setelah menambahkan entri
+          }
+        }).catch((error) => console.error('Error:', error));
+
+        document.getElementById("productEntryForm").reset();
+        // document.querySelector("[data-modal-toggle='crudModal']").click();
+
+        return false;
+      }
+  });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
 {% endblock content %}

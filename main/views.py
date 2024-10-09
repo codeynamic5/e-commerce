@@ -10,12 +10,13 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    product_entries = ProductEntry.objects.filter(user=request.user)
-    context = {'product_entries' : product_entries, 'name': request.user.username, 'last_login': request.COOKIES['last_login']}
+    context = {'name': request.user.username, 'last_login': request.COOKIES['last_login']}
     return render(request, "main.html",context)
 
 def show_model_main(request):
@@ -41,11 +42,11 @@ def create_product_entry(request):
     return render(request, "create_product_entry.html", context)
 
 def show_xml(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
@@ -112,3 +113,20 @@ def delete_product(request, id):
     product.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    product = request.POST.get("product")
+    price = request.POST.get("price")
+    description = request.POST.get("description")
+    user = request.user
+
+    new_product = ProductEntry(
+        product=product, price=price,
+        description=description,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)

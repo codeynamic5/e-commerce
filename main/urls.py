@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import * #edit_product, delete_product
+from main.views import * #edit_product, delete_product, add_product_entry_ajax
 
 
 
@@ -20,4 +20,5 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('edit-mood/<uuid:id>', edit_product, name='edit_product'),
     path('delete/<uuid:id>', delete_product, name='delete_product'), # sesuaikan dengan nama fungsi yang dibuat
+    path('create-product-entry-ajax', add_product_entry_ajax, name='add_product_entry_ajax'),
 ]
