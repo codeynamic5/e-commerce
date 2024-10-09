@@ -902,3 +902,207 @@ Saya menggunakan referensi tutorial untuk mengerjakan tugas. Namun, karena saya 
 
    ```
 
+# Tugas 6: Tugas 6: JavaScript dan AJAX
+## Manfaat dari Penggunaan JavaScript dalam Pengembangan Aplikasi Web
+JavaScript memberikan banyak keuntungan dalam pengembangan web, antara lain:
+- Interaktivitas: JavaScript memungkinkan pembuatan elemen interaktif pada halaman web, seperti animasi, validasi form, dan pembaruan konten dinamis tanpa perlu me-refresh halaman.
+- Pengembangan sisi klien: Memungkinkan logika aplikasi dijalankan di browser pengguna, mengurangi beban server dan meningkatkan kinerja aplikasi.
+- Asynchronous Programming: Dengan fitur seperti AJAX, JavaScript dapat melakukan permintaan ke server tanpa mengganggu interaksi pengguna dengan halaman.
+- Pengembangan aplikasi single-page (SPA): JavaScript memungkinkan pembuatan aplikasi web yang berjalan di satu halaman, meningkatkan pengalaman pengguna.
+- Ekosistem yang kaya: Tersedia banyak library dan framework JavaScript yang mempercepat dan mempermudah pengembangan.
+
+## Fungsi dari Penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+await digunakan dalam fungsi asynchronous untuk menunggu hasil dari Promise (seperti yang dikembalikan oleh fetch()) sebelum melanjutkan eksekusi kode. <br />
+Jika tidak menggunakan await: <br />
+- Kode akan terus berjalan tanpa menunggu respons dari fetch().
+- Variabel yang menyimpan hasil fetch() akan berisi Promise yang belum resolved, bukan data yang diharapkan.
+- Kode yang bergantung pada hasil fetch() mungkin akan error atau tidak berfungsi sebagaimana mestinya.
+
+## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Decorator csrf_exempt digunakan untuk mengabaikan proteksi CSRF (Cross-Site Request Forgery) pada view tertentu. Ini diperlukan untuk AJAX POST karena:<br />
+- AJAX request biasanya tidak menyertakan CSRF token secara otomatis.
+- Tanpa csrf_exempt, server akan menolak request POST yang tidak memiliki token CSRF yang valid.
+- Dalam konteks aplikasi single-page atau API, di mana autentikasi mungkin menggunakan metode lain (seperti token), proteksi CSRF mungkin tidak diperlukan atau bahkan mengganggu fungsionalitas.<br />
+Namun, perlu diingat bahwa mengabaikan proteksi CSRF dapat membuka celah keamanan. Pastikan untuk mengimplementasikan mekanisme keamanan alternatif jika menggunakan csrf_exempt.
+
+## Pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data input dilakukan di backend (selain di frontend) karena:
+- Keamanan: Frontend dapat dengan mudah dimanipulasi oleh pengguna. Pembersihan di backend memastikan bahwa data yang masuk ke sistem sudah aman, terlepas dari manipulasi client-side.
+- Konsistensi: Backend menjamin bahwa semua data, baik yang masuk melalui web interface maupun API, melalui proses pembersihan yang sama.
+- Validasi komprehensif: Backend memiliki akses ke sumber daya server (seperti database) untuk melakukan validasi yang lebih kompleks.
+Defense in depth: Menerapkan pembersihan di kedua sisi memberikan lapisan keamanan tambahan.<br />
+Meskipun pembersihan di frontend penting untuk UX yang lebih baik dan mengurangi beban server, pembersihan di backend tetap krusial untuk keamanan dan integritas data.
+
+## Implementasi Checklist Step-by-Step
+### AJAX GET
+- Ubahlah kode cards data mood agar dapat mendukung AJAX GET.
+  - Menggantikan kode HTML dalam file `main.html` dan mengubahnya dengan:
+  ```
+      <div id="product_entry_cards"></div>
+  ```
+  - Membuat `<script>` get
+   ```
+      <script>
+  async function getProductEntries(){
+      return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+  }
+      </script>
+   ```
+- Lakukan pengambilan data mood menggunakan AJAX GET. Pastikan bahwa data yang diambil hanyalah data milik pengguna yang logged-in.
+  ```
+      data = ProductEntry.objects.filter(user=request.user)
+  ```
+
+###  AJAX POST
+- Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan mood.
+  ```
+      <button type="button" class="btn btn-primary font-weight-bold py-2 px-4 rounded-lg" data-bs-toggle="modal" data-bs-target="#crudModal">
+    Add New Product Entry by AJAX
+      </button>
+  ```
+- Buatlah fungsi view baru untuk menambahkan mood baru ke dalam basis data.
+  ```
+         @csrf_exempt
+         @require_POST
+         def add_product_entry_ajax(request):
+             product = strip_tags(request.POST.get("product"))
+             price = strip_tags(request.POST.get("price"))
+             description = strip_tags(request.POST.get("description"))
+             user = request.user
+         
+             new_product = ProductEntry(
+                 product=product, price=price,
+                 description=description,
+                 user=user
+             )
+             new_product.save()
+         
+             return HttpResponse(b"CREATED", status=201)
+  ```
+- Buatlah path /create-ajax/ yang mengarah ke fungsi view yang baru kamu buat.
+  - Memodifikasi file `urls.py` untuk impor fungsi
+     ```
+      from main.views import * # add_product_entry_ajax
+     ```
+  - Menambahkan urlpatterns:
+    ```
+      urlpatterns = [
+          ...
+          path('create-product-entry-ajax', add_product_entry_ajax, name='add_product_entry_ajax'),
+      ]
+    ```
+- Hubungkan form yang telah kamu buat di dalam modal kamu ke path /create-ajax/.
+   - Karena saya menggunakan Bootstrap, saya menambahkan implementasi Bootstrap:
+     ```
+               <div id="crudModal" tabindex="-1" aria-hidden="true" class="modal fade" role="dialog">
+                <div id="crudModalContent" class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <!-- Modal header -->
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add New Product Entry</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalBtn">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <form id="productEntryForm">
+                        <div class="form-group">
+                          <label for="product" class="col-form-label">Product</label>
+                          <input type="text" id="product" name="product" class="form-control" placeholder="Enter your product" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="price" class="col-form-label">Price</label>
+                          <textarea id="price" name="price" rows="3" class="form-control" placeholder="Enter the Price" required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="Description" class="col-form-label">Description)</label>
+                          <input type="text" id="description" name="description" class="form-control" required>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelButton">Cancel</button>
+                      <button type="submit" form="moodEntryForm" class="btn btn-primary" id="submitMoodEntry">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      ```
+  
+- Lakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar mood terbaru tanpa reload halaman utama secara keseluruhan.
+  ```
+         async function refreshProductEntries() {
+          document.getElementById("product_entry_cards").innerHTML = "";
+          document.getElementById("product_entry_cards").className = "";
+          const productEntries = await getProductEntries();
+          let htmlString = "";
+          let classNameString = "";
+      
+          if (productEntries.length === 0) {
+              classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+              htmlString = `
+                  <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                      <img src="{% static 'products/no-cheese.png' %}" alt="No Cheese" class="w-32 h-32 mb-4"/>
+                      <p class="text-center text-gray-600 mt-4">Belum ada data product pada Biyung Cafe.</p>
+                  </div>
+              `;
+          }
+          else {
+              classNameString = "columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full"
+              productEntries.forEach((item) => {
+                  htmlString += `
+                  <div class="relative break-inside-avoid">
+                      <div class="absolute top-2 z-10 left-1/2 -translate-x-1/2 flex items-center -space-x-2">
+                          <div class="w-[3rem] h-8 bg-gray-200 rounded-md opacity-80 -rotate-90"></div>
+                          <div class="w-[3rem] h-8 bg-gray-200 rounded-md opacity-80 -rotate-90"></div>
+                      </div>
+                      <div class="relative top-5 bg-indigo-100 shadow-md rounded-lg mb-6 break-inside-avoid flex flex-col border-2 border-indigo-300 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                          <div class="bg-indigo-200 text-gray-800 p-4 rounded-t-lg border-b-2 border-indigo-300">
+                              <h3 class="font-bold text-xl mb-2">${item.fields.product}</h3>
+                              <p class="text-gray-600">${item.fields.time}</p>
+                          </div>
+                          <div class="p-4">
+                              <p class="font-semibold text-lg mb-2">My Orders</p>
+                              <p class="text-gray-700 mb-2">
+                                  <span class="bg-[linear-gradient(to_bottom,transparent_0%,transparent_calc(100%_-_1px),#CDC1FF_calc(100%_-_1px))] bg-[length:100%_1.5rem] pb-1">${item.fields.feelings}</span>
+                              </p>
+                              <div class="mt-4">
+                                  <p class="text-gray-700 font-semibold mb-2">Description</p>
+                                  <div class="relative pt-1">
+                                      <div class="flex mb-2 items-center justify-between">
+                                          <div>
+                                              <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">
+                                                  ${item.fields.description > 10 ? '10+' : item.fields.description}
+                                              </span>
+                                          </div>
+                                      </div>
+                                      <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-indigo-200">
+                                          <div style="width: ${item.fields.description > 10 ? 100 : item.fields.description * 10}%;" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="absolute top-0 -right-4 flex space-x-1">
+                          <a href="/edit-product/${item.pk}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                              </svg>
+                          </a>
+                          <a href="/delete/${item.pk}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                              </svg>
+                          </a>
+                      </div>
+                  </div>
+                  `;
+              });
+          }
+          document.getElementById("product_entry_cards").className = classNameString;
+          document.getElementById("product_entry_cards").innerHTML = htmlString;
+      }
+      refreshProductEntries();
+  ```
