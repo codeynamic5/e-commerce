@@ -16,12 +16,50 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<<<<<<< HEAD
     {% endblock meta %}
+=======
+    <style>
+      .card {
+        width: 300px;
+        border: 1px solid;
+      }
+
+      .card img {
+        width: 100%;
+      }
+
+      .card-title {
+        margin: 12px;
+      }
+
+      .card-description {
+        margin: 12px;
+      }
+
+      .card-button {
+        color: azure;
+        background-color: blue;
+        border: none;
+        border-radius: 5px;
+        margin: 12px;
+        padding: 10px 20px;
+        text-align: left;
+      }
+    </style> 
+>>>>>>> e77869b (Tugas 9)
   </head>
   <div class="container mt-5">
     <h1 class="text-center text-light">Welcome to Biyung Cafe</h1>
     <h2 class="text-center text-light">Where Flavor Meets Divine</h2>
     <h3 class="text-center text-light">Welcome {{ name }} !</h3>
+
+    <div class="card">
+      <img src="https://acushnet.scene7.com/is/image/titleist/2024AVX-PDP-5050-Final?wid=1200&qlt=75&resMode=sharp2" alt="Card Image">
+      <div class="card-title"><h2>Golf Ball<h2></div>
+      <div class="card-description">This is a golf ball</div>
+      <button class="card-button">Hit the Ball</button>
+    </div> 
   </div>
 </html>
 

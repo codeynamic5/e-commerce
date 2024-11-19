@@ -20,5 +20,9 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('edit-mood/<uuid:id>', edit_product, name='edit_product'),
     path('delete/<uuid:id>', delete_product, name='delete_product'), # sesuaikan dengan nama fungsi yang dibuat
+<<<<<<< HEAD
     path('create-product-entry-ajax', add_product_entry_ajax, name='add_product_entry_ajax'),
+=======
+    path('create-flutter/', create_product_flutter, name='create_product_flutter'),
+>>>>>>> e77869b (Tugas 9)
 ]

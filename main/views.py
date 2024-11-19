@@ -11,7 +11,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+<<<<<<< HEAD
 from django.views.decorators.http import require_POST
+=======
+import json
+from django.http import JsonResponse
+>>>>>>> e77869b (Tugas 9)
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -115,6 +120,7 @@ def delete_product(request, id):
     return HttpResponseRedirect(reverse('main:show_main'))
 
 @csrf_exempt
+<<<<<<< HEAD
 @require_POST
 def add_product_entry_ajax(request):
     product = strip_tags(request.POST.get("product"))
@@ -130,3 +136,21 @@ def add_product_entry_ajax(request):
     new_product.save()
 
     return HttpResponse(b"CREATED", status=201)
+=======
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_mood = ProductEntry.objects.create(
+            user=request.user,
+            product=data["product"],
+            price=int(data["price"]),
+            description=data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+>>>>>>> e77869b (Tugas 9)
