@@ -120,28 +120,11 @@ def delete_product(request, id):
     return HttpResponseRedirect(reverse('main:show_main'))
 
 @csrf_exempt
-<<<<<<< HEAD
-@require_POST
-def add_product_entry_ajax(request):
-    product = strip_tags(request.POST.get("product"))
-    price = strip_tags(request.POST.get("price"))
-    description = strip_tags(request.POST.get("description"))
-    user = request.user
-
-    new_product = ProductEntry(
-        product=product, price=price,
-        description=description,
-        user=user
-    )
-    new_product.save()
-
-    return HttpResponse(b"CREATED", status=201)
-=======
 def create_product_flutter(request):
     if request.method == 'POST':
 
         data = json.loads(request.body)
-        new_mood = ProductEntry.objects.create(
+        new_product = ProductEntry.objects.create(
             user=request.user,
             product=data["product"],
             price=int(data["price"]),
@@ -153,4 +136,3 @@ def create_product_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
->>>>>>> e77869b (Tugas 9)
