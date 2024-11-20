@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -132,3 +133,23 @@ def create_product_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+    
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    if request.method == 'POST' and request.is_ajax():
+        data = json.loads(request.body)
+        product = data["product"]
+        description = data["description"]
+        price = data["price"]
+        user = request.user
+
+        new_product = ProductEntry(
+            product=product, 
+            description=description,
+            price=price, 
+            user=user
+        )
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
